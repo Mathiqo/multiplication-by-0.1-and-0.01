@@ -1,178 +1,409 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>MathIQ - Fractions to Decimals</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f5f7ff;
-            margin: 0;
-            padding: 30px;
-            text-align: center;
-        }
-
-        .container {
-            max-width: 700px;
-            margin: auto;
-            background: white;
-            padding: 35px;
-            border-radius: 20px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        }
-
-        h1 {
-            color: #333;
-        }
-
-        .progress {
-            margin: 20px 0;
-            font-weight: bold;
-        }
-
-        .bar {
-            height: 12px;
-            background: #ddd;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            width: 10%;
-            background: #5b6cff;
-        }
-
-        .whole {
-            display: flex;
-            justify-content: center;
-            margin: 30px 0;
-        }
-
-        .part {
-            width: 45px;
-            height: 70px;
-            border: 2px solid #333;
-            background: #e8ecff;
-        }
-
-        .selected {
-            background: #5b6cff;
-        }
-
-        .equation {
-            font-size: 30px;
-            font-weight: bold;
-            margin: 30px;
-        }
-
-        .question {
-            font-size: 20px;
-            margin: 25px 0;
-        }
-
-        button {
-            display: block;
-            width: 80%;
-            max-width: 400px;
-            margin: 12px auto;
-            padding: 14px;
-            font-size: 18px;
-            border: none;
-            border-radius: 10px;
-            background: #eeeeee;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #dfe3ff;
-        }
-
-        #feedback {
-            font-size: 20px;
-            font-weight: bold;
-            margin-top: 20px;
-        }
-    </style>
-</head>
-
-<body>
-
-<div class="container">
-
-    <h1>MathIQ 🧠</h1>
-
-    <div class="progress">
-        Lesson 1 of 10
-    </div>
-
-    <div class="bar">
-        <div class="progress-fill"></div>
-    </div>
-
-    <h2>Let's understand 1/10</h2>
-
-    <p>Here is one whole divided into 10 equal parts.</p>
-
-    <div class="whole">
-        <div class="part selected"></div>
-        <div class="part"></div>
-        <div class="part"></div>
-        <div class="part"></div>
-        <div class="part"></div>
-        <div class="part"></div>
-        <div class="part"></div>
-        <div class="part"></div>
-        <div class="part"></div>
-        <div class="part"></div>
-    </div>
-
-    <p>
-        One part out of ten parts is:
-    </p>
-
-    <div class="equation">
-        1/10 = 0.1
-    </div>
-
-    <hr>
-
-    <div class="question">
-        🍫 A chocolate bar is divided into 10 equal pieces.
-        <br><br>
-        You take 1 piece. What decimal part did you take?
-    </div>
-
-    <button onclick="checkAnswer(0.01)">0.01</button>
-    <button onclick="checkAnswer(0.1)">0.1</button>
-    <button onclick="checkAnswer(1)">1.0</button>
-
-    <div id="feedback"></div>
-
-</div>
-
-<script>
-
-function checkAnswer(answer) {
-
-    const feedback = document.getElementById("feedback");
-
-    if (answer === 0.1) {
-
-        feedback.innerHTML = "🎉 Correct! 1/10 = 0.1";
-
-    } else {
-
-        feedback.innerHTML = "💡 Try again. One out of ten is 1/10 = 0.1";
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mathiq — The Decimal Bakery</title>
+  <style>
+    :root {
+      --bg: #fdfbf7;
+      --card-bg: #ffffff;
+      --primary: #d97706;
+      --primary-hover: #b45309;
+      --secondary: #0284c7;
+      --success: #16a34a;
+      --danger: #dc2626;
+      --text: #1c1917;
+      --text-muted: #78716c;
+      --border: #e7e5e4;
+      --slot-bg: #f5f5f4;
+      --radius: 16px;
+      --shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
     }
 
-}
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+    body { background-color: var(--bg); color: var(--text); min-height: 100vh; padding: 2rem 1rem; }
 
-</script>
+    .app-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
 
+    header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    header h1 { font-size: 2rem; color: var(--primary); margin-bottom: 0.25rem; }
+    header p { color: var(--text-muted); font-size: 1.05rem; }
+
+    /* Visual Proof Header */
+    .proof-box {
+      background: #fef3c7;
+      border: 2px solid #fde68a;
+      border-radius: 12px;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .frac-unit {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      vertical-align: middle;
+      font-weight: 800;
+      font-size: 1.3rem;
+      color: var(--primary);
+      line-height: 1;
+    }
+
+    .frac-unit .num { border-bottom: 2px solid var(--primary); padding: 0 4px; }
+    .frac-unit .den { padding: 0 4px; }
+
+    .eq-sign { font-size: 1.8rem; font-weight: 900; color: var(--primary); }
+
+    /* Progress Stepper */
+    .stepper {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .step-dot {
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      background: var(--slot-bg);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+
+    .step-dot.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* Place Value Table */
+    .board-wrapper { margin: 1.5rem 0; overflow-x: auto; }
+
+    .place-board {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr) 30px repeat(2, 1fr);
+      gap: 0.5rem;
+      align-items: center;
+      min-width: 600px;
+    }
+
+    .header-col {
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .header-col span { font-size: 0.75rem; font-weight: 400; display: block; }
+
+    .slot {
+      height: 75px;
+      background: var(--slot-bg);
+      border: 2px dashed #d6d3d1;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .digit-card {
+      width: 50px;
+      height: 60px;
+      background: var(--secondary);
+      color: white;
+      font-size: 2rem;
+      font-weight: 800;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.6); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .decimal-point {
+      font-size: 3rem;
+      font-weight: 900;
+      color: var(--primary);
+      text-align: center;
+    }
+
+    /* Interactive Task Panel */
+    .task-card {
+      background: #f0f9ff;
+      border: 2px solid #bae6fd;
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .task-title { font-size: 1.2rem; font-weight: 800; color: #0369a1; margin-bottom: 0.5rem; }
+
+    .btn {
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background: var(--primary);
+      color: white;
+      transition: all 0.2s;
+      margin-top: 1rem;
+    }
+
+    .btn:hover { background: var(--primary-hover); transform: translateY(-1px); }
+
+    .btn-next {
+      background: var(--success);
+    }
+    .btn-next:hover { background: #15803d; }
+
+    /* Quiz Option Buttons */
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      max-width: 300px;
+      margin: 1rem auto 0 auto;
+    }
+
+    .opt-btn {
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      font-weight: 700;
+      background: white;
+      border: 2px solid #cbd5e1;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .opt-btn:hover { border-color: var(--primary); background: #fef3c7; }
+
+    .feedback-msg {
+      margin-top: 1rem;
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    <header>
+      <h1>🍞 Mathiq: The Decimal Bakery</h1>
+      <p>Discover Place Value Shifts Step-by-Step</p>
+    </header>
+
+    <!-- Visual Proof Header -->
+    <div class="proof-box">
+      <div>
+        <div class="frac-unit"><span class="num">1</span><span class="den">10</span></div>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;">1 part out of 10</p>
+      </div>
+      <div class="eq-sign">=</div>
+      <div>
+        <div style="font-size:1.5rem; font-weight:800; color:var(--primary);">0.1</div>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;">Tenths Position</p>
+      </div>
+    </div>
+
+    <!-- Stepper Navigation -->
+    <div class="stepper">
+      <div class="step-dot active" id="dot-1">1. Calculate 1/10</div>
+      <div class="step-dot" id="dot-2">2. Discover 0.1</div>
+      <div class="step-dot" id="dot-3">3. Interactive Shift</div>
+      <div class="step-dot" id="dot-4">4. Quest Challenge</div>
+    </div>
+
+    <!-- Place Value Board -->
+    <div class="board-wrapper">
+      <div class="place-board">
+        <div class="header-col">Hundreds <span>(100)</span></div>
+        <div class="header-col">Tens <span>(10)</span></div>
+        <div class="header-col">Ones <span>(1)</span></div>
+        <div></div>
+        <div class="header-col">Tenths <span>(0.1)</span></div>
+        <div class="header-col">Hundredths <span>(0.01)</span></div>
+
+        <div class="slot" id="s-100"></div>
+        <div class="slot" id="s-10"></div>
+        <div class="slot" id="s-1"></div>
+        <div class="decimal-point">.</div>
+        <div class="slot" id="s-0_1"></div>
+        <div class="slot" id="s-0_01"></div>
+      </div>
+    </div>
+
+    <!-- Interactive Task Container -->
+    <div class="task-card" id="task-card">
+      <div class="task-title" id="task-title">Step 1: Calculate 1/10 of 400g</div>
+      <p id="task-desc">Maya has <strong>400g</strong> of dough. Calculate <span class="frac-unit" style="font-size:0.9rem;"><span class="num">1</span><span class="den">10</span></span> of 400g (Divide by 10):</p>
+
+      <div id="interaction-area">
+        <button class="btn" onclick="executeStep(1)">Calculate 400 × 1/10</button>
+      </div>
+
+      <div class="feedback-msg" id="feedback"></div>
+      
+      <!-- Continue Button (Hidden until correct answer/action) -->
+      <button class="btn btn-next" id="next-btn" style="display:none;" onclick="loadNextStage()">
+        Continue ➔
+      </button>
+    </div>
+  </div>
+
+  <script>
+    let stage = 1;
+    let currentValue = 400;
+
+    const slots = {
+      100: document.getElementById('s-100'),
+      10: document.getElementById('s-10'),
+      1: document.getElementById('s-1'),
+      '0_1': document.getElementById('s-0_1'),
+      '0_01': document.getElementById('s-0_01')
+    };
+
+    function renderDigits(val) {
+      Object.values(slots).forEach(s => s.innerHTML = '');
+      
+      let rounded = Math.round(val * 100) / 100;
+      let parts = rounded.toString().split('.');
+      let intStr = parts[0] || '0';
+      let decStr = parts[1] || '';
+
+      let rev = intStr.split('').reverse().join('');
+      if (rev[0]) createCard(slots['1'], rev[0]);
+      if (rev[1]) createCard(slots['10'], rev[1]);
+      if (rev[2]) createCard(slots['100'], rev[2]);
+
+      if (decStr[0]) createCard(slots['0_1'], decStr[0]);
+      if (decStr[1]) createCard(slots['0_01'], decStr[1]);
+    }
+
+    function createCard(slot, char) {
+      if(!slot) return;
+      const card = document.createElement('div');
+      card.className = 'digit-card';
+      card.innerText = char;
+      slot.appendChild(card);
+    }
+
+    function executeStep(s) {
+      const feedback = document.getElementById('feedback');
+      const nextBtn = document.getElementById('next-btn');
+
+      if (s === 1) {
+        currentValue = 40;
+        renderDigits(currentValue);
+        feedback.innerText = "✨ 400 ÷ 10 = 40g! Notice how every digit shifted 1 column to the RIGHT ➔";
+        feedback.style.color = "var(--success)";
+        nextBtn.innerText = "Continue ➔";
+        nextBtn.style.display = "inline-block";
+      } else if (s === 3) {
+        currentValue = 40;
+        renderDigits(currentValue);
+        feedback.innerText = "✨ 400 × 0.1 = 40g! Multiplying by 0.1 shifts digits 1 column to the RIGHT ➔";
+        feedback.style.color = "var(--success)";
+        nextBtn.innerText = "Continue ➔";
+        nextBtn.style.display = "inline-block";
+      }
+    }
+
+    function loadNextStage() {
+      const title = document.getElementById('task-title');
+      const desc = document.getElementById('task-desc');
+      const area = document.getElementById('interaction-area');
+      const feedback = document.getElementById('feedback');
+      const nextBtn = document.getElementById('next-btn');
+
+      feedback.innerText = "";
+      nextBtn.style.display = "none";
+      stage++;
+
+      // Update dots
+      document.querySelectorAll('.step-dot').forEach(d => d.classList.remove('active'));
+      document.getElementById(`dot-${Math.min(stage, 4)}`).classList.add('active');
+
+      if (stage === 2) {
+        title.innerText = "Step 2: Connecting 1/10 to 0.1";
+        desc.innerHTML = "Since <span class='frac-unit' style='font-size:0.9rem;'><span class='num'>1</span><span class='den'>10</span></span> and <strong>0.1</strong> are identical, multiplying by <strong>0.1</strong> does the exact same thing!";
+        area.innerHTML = `<p style="font-weight:700; color:var(--primary); font-size:1.1rem; margin-top:0.5rem;">400 × 1/10 = 40<br>400 × 0.1 = 40</p>`;
+        nextBtn.innerText = "Continue ➔";
+        nextBtn.style.display = "inline-block";
+      } else if (stage === 3) {
+        currentValue = 400;
+        renderDigits(currentValue);
+        title.innerText = "Step 3: Try Multiplying by 0.1";
+        desc.innerHTML = "Click the button below to scale <strong>400g</strong> by <strong>0.1</strong>:";
+        area.innerHTML = `<button class="btn" onclick="executeStep(3)">Multiply 400 × 0.1</button>`;
+        nextBtn.innerText = "Continue ➔";
+      } else if (stage === 4) {
+        title.innerText = "Step 4: Quest Challenge";
+        desc.innerHTML = "🍫 A chocolate bar is divided into 10 equal pieces. You take 1 piece. What decimal part did you take?";
+        area.innerHTML = `
+          <div class="options-grid">
+            <button class="opt-btn" onclick="checkQuiz('0.01')">0.01</button>
+            <button class="opt-btn" onclick="checkQuiz('0.1')">0.1</button>
+            <button class="opt-btn" onclick="checkQuiz('1.0')">1.0</button>
+          </div>
+        `;
+        nextBtn.innerText = "Restart Activity ↺";
+      } else {
+        // Reset to beginning
+        stage = 0;
+        currentValue = 400;
+        renderDigits(currentValue);
+        loadNextStage();
+      }
+    }
+
+    function checkQuiz(ans) {
+      const feedback = document.getElementById('feedback');
+      const nextBtn = document.getElementById('next-btn');
+
+      if (ans === '0.1') {
+        feedback.innerText = "🎉 Correct! 1/10 = 0.1";
+        feedback.style.color = "var(--success)";
+        nextBtn.innerText = "Continue ➔";
+        nextBtn.style.display = "inline-block";
+      } else {
+        feedback.innerText = "❌ Try again! Think: 1 part out of 10 equal parts = 0.1";
+        feedback.style.color = "var(--danger)";
+        nextBtn.style.display = "none";
+      }
+    }
+
+    // Initialize board
+    renderDigits(currentValue);
+  </script>
 </body>
 </html>
