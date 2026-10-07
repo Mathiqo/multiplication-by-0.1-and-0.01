@@ -4,344 +4,245 @@
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
-<title>MathIQ - Tenths</title>
-
+<title>MathIQ - Decimals & Multiplication</title>
 
 <style>
 
 /* =========================
-   GENERAL PAGE
-   ========================= */
+   GENERAL
+========================= */
+
+* {
+    box-sizing: border-box;
+}
 
 body {
-
     font-family: Arial, sans-serif;
-
     background: #f4f6ff;
-
     margin: 0;
-
-    padding: 25px;
+    padding: 20px;
+    color: #333;
 }
-
 
 .container {
-
-    max-width: 750px;
-
+    max-width: 800px;
     margin: auto;
-
     background: white;
-
     padding: 35px;
-
-    border-radius: 20px;
-
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-
+    border-radius: 22px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.1);
 }
-
-
-/* =========================
-   HEADINGS
-   ========================= */
 
 h1 {
-
     text-align: center;
-
-    color: #333;
-
+    margin-bottom: 30px;
 }
-
 
 h2 {
-
-    color: #333;
-
     margin-top: 25px;
-
 }
-
 
 h3 {
+    margin-top: 25px;
+}
 
-    color: #444;
-
+p {
+    line-height: 1.6;
 }
 
 
 /* =========================
-   PROGRESS BAR
-   ========================= */
+   LEARNING CARDS
+========================= */
 
-.progress-bar {
-
-    background: #ddd;
-
-    height: 12px;
-
-    border-radius: 10px;
-
-    overflow: hidden;
-
-    margin-bottom: 15px;
-
+.learning-card {
+    background: #f0f2ff;
+    padding: 22px;
+    border-radius: 16px;
+    margin: 20px 0;
 }
 
-
-.progress {
-
-    background: #5b6cff;
-
-    height: 100%;
-
-    width: 0%;
-
-    transition: width 0.3s;
-
+.key-point {
+    background: #fff4d6;
+    padding: 18px;
+    border-radius: 14px;
+    margin: 20px 0;
+    font-weight: bold;
 }
 
 
 /* =========================
-   LEARNING VISUAL
-   ========================= */
+   DECIMAL VISUAL
+========================= */
 
 .visual {
-
     display: flex;
-
     justify-content: center;
-
     margin: 30px 0;
-
     gap: 2px;
-
 }
-
 
 .part {
-
     width: 45px;
-
-    height: 75px;
-
+    height: 70px;
     border: 2px solid #333;
-
     background: white;
-
 }
 
-
 .part.active {
-
     background: #5b6cff;
-
 }
 
 
 /* =========================
    EQUATIONS
-   ========================= */
+========================= */
 
 .equation {
-
     text-align: center;
-
     font-size: 32px;
-
     font-weight: bold;
-
     margin: 25px;
-
 }
 
 
 /* =========================
-   EXPLANATION BOX
-   ========================= */
+   PROGRESS
+========================= */
 
-.example {
+.progress-container {
+    margin-bottom: 20px;
+}
 
-    background: #eef0ff;
+.progress-bar {
+    height: 12px;
+    background: #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+}
 
-    padding: 20px;
+.progress {
+    height: 100%;
+    width: 0%;
+    background: #5b6cff;
+    transition: width 0.3s;
+}
 
-    border-radius: 15px;
 
-    margin: 20px 0;
+/* =========================
+   QUESTIONS
+========================= */
 
+.stage {
+    color: #666;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.question {
+    font-size: 23px;
+    line-height: 1.5;
+    margin: 25px 0;
 }
 
 
 /* =========================
    BUTTONS
-   ========================= */
+========================= */
 
 button {
-
     width: 100%;
-
-    padding: 14px;
-
+    padding: 15px;
     margin: 8px 0;
-
     border: none;
-
-    border-radius: 10px;
-
+    border-radius: 11px;
     background: #eeeeee;
-
     font-size: 18px;
-
     cursor: pointer;
-
     transition: 0.2s;
-
 }
-
 
 button:hover {
-
     background: #dfe3ff;
-
 }
-
 
 .primary {
-
     background: #5b6cff;
-
     color: white;
-
 }
-
 
 .primary:hover {
-
     background: #4555e8;
-
-}
-
-
-/* =========================
-   HIDDEN SECTIONS
-   ========================= */
-
-.hidden {
-
-    display: none;
-
-}
-
-
-/* =========================
-   QUIZ
-   ========================= */
-
-.question-number {
-
-    color: #666;
-
-    font-weight: bold;
-
-    margin-top: 20px;
-
-}
-
-
-.question {
-
-    font-size: 22px;
-
-    margin: 25px 0;
-
-    line-height: 1.5;
-
 }
 
 
 /* =========================
    FEEDBACK
-   ========================= */
+========================= */
 
 .feedback {
-
+    min-height: 35px;
     text-align: center;
-
     font-size: 20px;
-
     font-weight: bold;
-
     margin: 20px 0;
-
-    min-height: 30px;
-
 }
 
 
 /* =========================
    RESULT
-   ========================= */
+========================= */
 
 .score {
-
     text-align: center;
-
-    font-size: 32px;
-
+    font-size: 38px;
     font-weight: bold;
+    margin: 30px;
+}
 
-    margin: 30px 0;
-
+.result-message {
+    text-align: center;
+    font-size: 20px;
+    line-height: 1.6;
 }
 
 
-.result-message {
+/* =========================
+   HIDDEN
+========================= */
 
-    text-align: center;
-
-    font-size: 20px;
-
-    margin-bottom: 30px;
-
+.hidden {
+    display: none;
 }
 
 
 /* =========================
    MOBILE
-   ========================= */
+========================= */
 
 @media (max-width: 600px) {
 
     body {
-
         padding: 10px;
-
     }
 
     .container {
-
         padding: 20px;
-
     }
 
     .part {
-
-        width: 25px;
-
+        width: 27px;
         height: 55px;
-
     }
 
     .equation {
+        font-size: 25px;
+    }
 
-        font-size: 26px;
-
+    .question {
+        font-size: 20px;
     }
 
 }
@@ -357,151 +258,223 @@ button:hover {
 <div class="container">
 
 
-<!-- =====================================================
+<!-- ==================================================
      LEARNING SECTION
-     ===================================================== -->
+================================================== -->
 
 <div id="learnSection">
-
 
 <h1>🧠 MathIQ</h1>
 
 
-<h2>🌟 Let's Learn: Tenths</h2>
+<!-- =========================
+     LESSON 1
+========================= -->
 
+<div class="learning-card">
 
-<p>
-
-Imagine you have <b>one whole chocolate bar</b>.
-
-</p>
-
+<h2>🌟 Step 1: Understanding Tenths</h2>
 
 <p>
-
-We divide the whole into
-
-<b>10 equal parts</b>.
-
+Imagine one whole chocolate bar.
 </p>
 
+<p>
+We divide it into <b>10 equal parts</b>.
+</p>
 
-<!-- TEN PART VISUAL -->
 
 <div class="visual">
 
 <div class="part active"></div>
-
 <div class="part"></div>
-
 <div class="part"></div>
-
 <div class="part"></div>
-
 <div class="part"></div>
-
 <div class="part"></div>
-
 <div class="part"></div>
-
 <div class="part"></div>
-
 <div class="part"></div>
-
 <div class="part"></div>
 
 </div>
 
 
 <p style="text-align:center;">
-
-The blue part is
-
-<b>1 part out of 10</b>.
-
+One part out of ten is:
 </p>
 
+
+<div class="equation">
+1/10 = 0.1
+</div>
+
+
+<div class="key-point">
+
+💡 One tenth = 0.1
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     LESSON 2
+========================= -->
+
+<div class="learning-card">
+
+<h2>🔎 Step 2: Understanding Hundredths</h2>
+
+<p>
+Now imagine a whole divided into
+<b>100 equal parts</b>.
+</p>
+
+<p>
+One part out of 100 is called
+<b>one hundredth</b>.
+</p>
+
+
+<div class="equation">
+1/100 = 0.01
+</div>
+
+
+<div class="key-point">
+
+💡 One hundredth = 0.01
+
+</div>
+
+
+<p>
+Notice the difference:
+</p>
 
 <div class="equation">
 
 1/10 = 0.1
 
-</div>
+<br>
 
-
-<div class="example">
-
-<h3>💡 Remember</h3>
-
-
-<p>
-
-<b>1/10</b> means
-
-one part when a whole is divided
-
-into ten equal parts.
-
-</p>
-
-
-<p>
-
-In decimal form:
-
-</p>
-
-
-<div class="equation">
-
-1/10 = 0.1
+1/100 = 0.01
 
 </div>
 
 </div>
 
 
-<h3>🔍 Look at these examples</h3>
+<!-- =========================
+     LESSON 3
+========================= -->
 
+<div class="learning-card">
+
+<h2>✖️ Step 3: Multiplying by 0.1</h2>
 
 <p>
-
-Two parts out of ten:
-
+Multiplying a number by <b>0.1</b>
+is the same as dividing it by <b>10</b>.
 </p>
 
 
 <div class="equation">
 
-2/10 = 0.2
+10 × 0.1 = 1
 
 </div>
 
 
+<div class="equation">
+
+25 × 0.1 = 2.5
+
+</div>
+
+
+<div class="equation">
+
+48 × 0.1 = 4.8
+
+</div>
+
+
+<div class="key-point">
+
+💡 × 0.1 means ÷ 10
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     LESSON 4
+========================= -->
+
+<div class="learning-card">
+
+<h2>✖️ Step 4: Multiplying by 0.01</h2>
+
 <p>
-
-Five parts out of ten:
-
+Multiplying a number by <b>0.01</b>
+is the same as dividing it by <b>100</b>.
 </p>
 
 
 <div class="equation">
 
-5/10 = 0.5
+10 × 0.01 = 0.1
 
 </div>
 
 
-<p>
+<div class="equation">
 
-Ten parts out of ten:
+25 × 0.01 = 0.25
 
-</p>
+</div>
 
 
 <div class="equation">
 
-10/10 = 1
+48 × 0.01 = 0.48
+
+</div>
+
+
+<div class="key-point">
+
+💡 × 0.01 means ÷ 100
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     QUICK CHECK
+========================= -->
+
+<div class="learning-card">
+
+<h2>🧠 Remember</h2>
+
+<p>
+<b>× 0.1</b> → divide by 10
+</p>
+
+<p>
+<b>× 0.01</b> → divide by 100
+</p>
+
+<p>
+The decimal point moves according to the
+number of zeros in the denominator.
+</p>
 
 </div>
 
@@ -514,54 +487,50 @@ I'm Ready! Start Practice →
 
 </button>
 
-
 </div>
 
 
-<!-- =====================================================
+<!-- ==================================================
      QUIZ SECTION
-     ===================================================== -->
+================================================== -->
 
 <div id="quizSection" class="hidden">
-
 
 <h1>🧠 MathIQ</h1>
 
 
+<div class="progress-container">
+
 <div class="progress-bar">
 
 <div
-class="progress"
-id="progress">
-
+id="progress"
+class="progress">
 </div>
 
 </div>
-
-
-<p
-class="question-number"
-id="questionNumber">
-
-</p>
-
-
-<div
-class="question"
-id="question">
-
-</div>
-
-
-<div id="answers">
 
 </div>
 
 
 <div
-class="feedback"
-id="feedback">
+id="questionNumber"
+class="stage">
+</div>
 
+
+<div
+id="question"
+class="question">
+</div>
+
+
+<div id="answers"></div>
+
+
+<div
+id="feedback"
+class="feedback">
 </div>
 
 
@@ -574,33 +543,29 @@ Next Question →
 
 </button>
 
-
 </div>
 
 
-<!-- =====================================================
+<!-- ==================================================
      RESULT SECTION
-     ===================================================== -->
+================================================== -->
 
 <div
 id="resultSection"
 class="hidden">
 
-
-<h1>🎉 Well Done!</h1>
+<h1>🎉 Lesson Complete!</h1>
 
 
 <div
-class="score"
-id="score">
-
+id="score"
+class="score">
 </div>
 
 
 <div
-class="result-message"
-id="resultMessage">
-
+id="resultMessage"
+class="result-message">
 </div>
 
 
@@ -612,7 +577,6 @@ Try Again
 
 </button>
 
-
 </div>
 
 
@@ -622,453 +586,386 @@ Try Again
 <script>
 
 
-/* =====================================================
-   QUESTIONS
-   ===================================================== */
+/* ==================================================
+   QUESTION BANK
+================================================== */
 
 
 const questions = [
 
-
-/* =========================
-   PART A — CONCEPT
-   ========================= */
+/* ================================================
+   PART A — TENTHS
+================================================ */
 
 
 {
-
 type: "concept",
-
 question: "What is 1/10 as a decimal?",
-
 answers: ["0.01", "0.1", "1"],
-
 correct: "0.1"
-
 },
 
-
 {
-
 type: "concept",
-
 question: "What is 2/10 as a decimal?",
-
-answers: ["0.2", "0.02", "2"],
-
-correct: "0.2"
-
-},
-
-
-{
-
-type: "concept",
-
-question: "What is 3/10 as a decimal?",
-
-answers: ["0.3", "0.03", "3"],
-
-correct: "0.3"
-
-},
-
-
-{
-
-type: "concept",
-
-question: "What is 4/10 as a decimal?",
-
-answers: ["0.04", "0.4", "4"],
-
-correct: "0.4"
-
-},
-
-
-{
-
-type: "concept",
-
-question: "What is 5/10 as a decimal?",
-
-answers: ["0.05", "0.5", "5"],
-
-correct: "0.5"
-
-},
-
-
-{
-
-type: "concept",
-
-question: "What is 6/10 as a decimal?",
-
-answers: ["0.06", "0.6", "6"],
-
-correct: "0.6"
-
-},
-
-
-{
-
-type: "concept",
-
-question: "What is 7/10 as a decimal?",
-
-answers: ["0.7", "0.07", "7"],
-
-correct: "0.7"
-
-},
-
-
-{
-
-type: "concept",
-
-question: "What is 8/10 as a decimal?",
-
-answers: ["0.08", "8", "0.8"],
-
-correct: "0.8"
-
-},
-
-
-{
-
-type: "concept",
-
-question: "What is 9/10 as a decimal?",
-
-answers: ["0.09", "0.9", "9"],
-
-correct: "0.9"
-
-},
-
-
-{
-
-type: "concept",
-
-question: "What is 10/10 as a decimal?",
-
-answers: ["0.1", "1", "10"],
-
-correct: "1"
-
-},
-
-
-/* =========================
-   PART B — APPLY
-   ========================= */
-
-
-{
-
-type: "practice",
-
-question: "Which fraction is equal to 0.2?",
-
-answers: ["2/10", "20/10", "1/2"],
-
-correct: "2/10"
-
-},
-
-
-{
-
-type: "practice",
-
-question: "Which fraction is equal to 0.6?",
-
-answers: ["6/10", "1/6", "60/10"],
-
-correct: "6/10"
-
-},
-
-
-{
-
-type: "practice",
-
-question: "Which decimal is equal to 4/10?",
-
-answers: ["0.04", "0.4", "4.0"],
-
-correct: "0.4"
-
-},
-
-
-{
-
-type: "practice",
-
-question: "Which decimal is equal to 9/10?",
-
-answers: ["0.09", "0.9", "9.0"],
-
-correct: "0.9"
-
-},
-
-
-{
-
-type: "practice",
-
-question: "Which is greater?",
-
-answers: ["0.3", "0.8", "They are equal"],
-
-correct: "0.8"
-
-},
-
-
-{
-
-type: "practice",
-
-question: "Which is smaller?",
-
-answers: ["0.2", "0.7", "They are equal"],
-
-correct: "0.2"
-
-},
-
-
-{
-
-type: "practice",
-
-question: "Which number represents 5 tenths?",
-
-answers: ["0.05", "0.5", "5"],
-
-correct: "0.5"
-
-},
-
-
-{
-
-type: "practice",
-
-question: "How many tenths make one whole?",
-
-answers: ["5", "10", "100"],
-
-correct: "10"
-
-},
-
-
-{
-
-type: "practice",
-
-question: "0.7 means how many tenths?",
-
-answers: ["7 tenths", "70 tenths", "1 tenth"],
-
-correct: "7 tenths"
-
-},
-
-
-{
-
-type: "practice",
-
-question: "Which statement is correct?",
-
-answers: [
-
-"0.1 = 1/10",
-
-"0.1 = 10/1",
-
-"0.1 = 1/100"
-
-],
-
-correct: "0.1 = 1/10"
-
-},
-
-
-/* =========================
-   PART C — WORD PROBLEMS
-   ========================= */
-
-
-{
-
-type: "word",
-
-question:
-
-"A chocolate bar is divided into 10 equal pieces. Sara eats 1 piece. What decimal part did she eat?",
-
-answers: ["0.01", "0.1", "1"],
-
-correct: "0.1"
-
-},
-
-
-{
-
-type: "word",
-
-question:
-
-"A cake is divided into 10 equal pieces. Arun eats 3 pieces. What decimal part did he eat?",
-
-answers: ["0.3", "0.03", "3"],
-
-correct: "0.3"
-
-},
-
-
-{
-
-type: "word",
-
-question:
-
-"A bottle is filled to 7 out of 10 equal marks. What decimal represents the amount filled?",
-
-answers: ["0.07", "0.7", "7"],
-
-correct: "0.7"
-
-},
-
-
-{
-
-type: "word",
-
-question:
-
-"A ribbon is divided into 10 equal sections. Maya uses 5 sections. What fraction did she use?",
-
-answers: ["5/10", "1/5", "10/5"],
-
-correct: "5/10"
-
-},
-
-
-{
-
-type: "word",
-
-question:
-
-"A pizza is divided into 10 equal slices. 8 slices are left. What decimal of the pizza is left?",
-
-answers: ["0.08", "0.8", "8"],
-
-correct: "0.8"
-
-},
-
-
-{
-
-type: "word",
-
-question:
-
-"A student completes 6 out of 10 tasks. What decimal shows the part completed?",
-
-answers: ["0.6", "0.06", "6"],
-
-correct: "0.6"
-
-},
-
-
-{
-
-type: "word",
-
-question:
-
-"A water tank is marked into 10 equal levels. The water reaches level 4. What decimal shows the filled part?",
-
-answers: ["0.04", "0.4", "4"],
-
-correct: "0.4"
-
-},
-
-
-{
-
-type: "word",
-
-question:
-
-"A box contains 10 equal sections. 9 sections contain apples. What decimal shows the part containing apples?",
-
-answers: ["0.09", "0.9", "9"],
-
-correct: "0.9"
-
-},
-
-
-{
-
-type: "word",
-
-question:
-
-"A runner completes 2/10 of a race. What decimal part of the race has been completed?",
-
 answers: ["0.02", "0.2", "2"],
-
 correct: "0.2"
+},
 
+{
+type: "concept",
+question: "What is 5/10 as a decimal?",
+answers: ["0.05", "0.5", "5"],
+correct: "0.5"
+},
+
+{
+type: "concept",
+question: "What is 8/10 as a decimal?",
+answers: ["0.08", "0.8", "8"],
+correct: "0.8"
+},
+
+{
+type: "concept",
+question: "Which fraction is equal to 0.3?",
+answers: ["3/10", "3/100", "30/10"],
+correct: "3/10"
 },
 
 
+/* ================================================
+   PART B — HUNDREDTHS
+================================================ */
+
+
 {
+type: "concept",
+question: "What is 1/100 as a decimal?",
+answers: ["0.1", "0.01", "1"],
+correct: "0.01"
+},
 
-type: "word",
+{
+type: "concept",
+question: "What is 5/100 as a decimal?",
+answers: ["0.5", "0.05", "5"],
+correct: "0.05"
+},
 
-question:
+{
+type: "concept",
+question: "What is 25/100 as a decimal?",
+answers: ["0.25", "2.5", "0.025"],
+correct: "0.25"
+},
 
-"A garden is divided into 10 equal areas. All 10 areas are planted. What decimal of the garden is planted?",
+{
+type: "concept",
+question: "Which fraction is equal to 0.07?",
+answers: ["7/10", "7/100", "70/100"],
+correct: "7/100"
+},
 
+{
+type: "concept",
+question: "Which is smaller?",
+answers: ["0.1", "0.01", "They are equal"],
+correct: "0.01"
+},
+
+
+/* ================================================
+   PART C — MULTIPLY BY 0.1
+================================================ */
+
+
+{
+type: "multiply01",
+question: "What is 10 × 0.1?",
 answers: ["0.1", "1", "10"],
-
 correct: "1"
+},
 
+{
+type: "multiply01",
+question: "What is 20 × 0.1?",
+answers: ["2", "0.2", "20"],
+correct: "2"
+},
+
+{
+type: "multiply01",
+question: "What is 50 × 0.1?",
+answers: ["5", "0.5", "50"],
+correct: "5"
+},
+
+{
+type: "multiply01",
+question: "What is 25 × 0.1?",
+answers: ["25", "0.25", "2.5"],
+correct: "2.5"
+},
+
+{
+type: "multiply01",
+question: "What is 48 × 0.1?",
+answers: ["4.8", "0.48", "48"],
+correct: "4.8"
+},
+
+{
+type: "multiply01",
+question: "What is 73 × 0.1?",
+answers: ["7.3", "0.73", "73"],
+correct: "7.3"
+},
+
+{
+type: "multiply01",
+question: "What is 6 × 0.1?",
+answers: ["0.06", "0.6", "6"],
+correct: "0.6"
+},
+
+{
+type: "multiply01",
+question: "What is 3.5 × 0.1?",
+answers: ["0.35", "3.5", "0.035"],
+correct: "0.35"
+},
+
+
+/* ================================================
+   PART D — MULTIPLY BY 0.01
+================================================ */
+
+
+{
+type: "multiply001",
+question: "What is 10 × 0.01?",
+answers: ["1", "0.1", "0.01"],
+correct: "0.1"
+},
+
+{
+type: "multiply001",
+question: "What is 20 × 0.01?",
+answers: ["2", "0.2", "0.02"],
+correct: "0.2"
+},
+
+{
+type: "multiply001",
+question: "What is 50 × 0.01?",
+answers: ["5", "0.5", "0.05"],
+correct: "0.5"
+},
+
+{
+type: "multiply001",
+question: "What is 25 × 0.01?",
+answers: ["0.25", "2.5", "0.025"],
+correct: "0.25"
+},
+
+{
+type: "multiply001",
+question: "What is 48 × 0.01?",
+answers: ["4.8", "0.48", "0.048"],
+correct: "0.48"
+},
+
+{
+type: "multiply001",
+question: "What is 73 × 0.01?",
+answers: ["7.3", "0.73", "0.073"],
+correct: "0.73"
+},
+
+{
+type: "multiply001",
+question: "What is 6 × 0.01?",
+answers: ["0.6", "0.06", "0.006"],
+correct: "0.06"
+},
+
+{
+type: "multiply001",
+question: "What is 3.5 × 0.01?",
+answers: ["0.35", "0.035", "0.0035"],
+correct: "0.035"
+},
+
+
+/* ================================================
+   PART E — MIXED PRACTICE
+================================================ */
+
+
+{
+type: "practice",
+question: "Which is equal to 30 × 0.1?",
+answers: ["3", "0.3", "30"],
+correct: "3"
+},
+
+{
+type: "practice",
+question: "Which is equal to 30 × 0.01?",
+answers: ["3", "0.3", "0.03"],
+correct: "0.3"
+},
+
+{
+type: "practice",
+question: "Which is greater?",
+answers: ["0.1", "0.01", "They are equal"],
+correct: "0.1"
+},
+
+{
+type: "practice",
+question: "Which is greater?",
+answers: ["5 × 0.1", "5 × 0.01", "They are equal"],
+correct: "5 × 0.1"
+},
+
+{
+type: "practice",
+question: "What is 100 × 0.1?",
+answers: ["1", "10", "100"],
+correct: "10"
+},
+
+{
+type: "practice",
+question: "What is 100 × 0.01?",
+answers: ["1", "10", "0.1"],
+correct: "1"
+},
+
+{
+type: "practice",
+question: "What is 2.5 × 0.1?",
+answers: ["0.25", "0.025", "2.5"],
+correct: "0.25"
+},
+
+{
+type: "practice",
+question: "What is 2.5 × 0.01?",
+answers: ["0.25", "0.025", "0.0025"],
+correct: "0.025"
+},
+
+{
+type: "practice",
+question: "Which expression means divide by 100?",
+answers: ["× 0.1", "× 0.01", "× 10"],
+correct: "× 0.01"
+},
+
+{
+type: "practice",
+question: "Which expression means divide by 10?",
+answers: ["× 0.1", "× 0.01", "× 10"],
+correct: "× 0.1"
+},
+
+
+/* ================================================
+   PART F — WORD PROBLEMS
+================================================ */
+
+
+{
+type: "word",
+question:
+"A notebook costs ₹50. What is 0.1 of its price?",
+answers: ["₹5", "₹0.5", "₹50"],
+correct: "₹5"
+},
+
+{
+type: "word",
+question:
+"A 40 cm ribbon is divided into 10 equal parts. How long is one part?",
+answers: ["4 cm", "0.4 cm", "40 cm"],
+correct: "4 cm"
+},
+
+{
+type: "word",
+question:
+"A bottle contains 2 litres of water. What is 0.1 of 2 litres?",
+answers: ["0.2 L", "0.02 L", "2 L"],
+correct: "0.2 L"
+},
+
+{
+type: "word",
+question:
+"A runner runs 60 km. What is 0.1 of the distance?",
+answers: ["6 km", "0.6 km", "60 km"],
+correct: "6 km"
+},
+
+{
+type: "word",
+question:
+"A shop has 300 apples. What is 0.1 of the apples?",
+answers: ["3", "30", "300"],
+correct: "30"
+},
+
+{
+type: "word",
+question:
+"A rope is 5 metres long. What is 0.01 of its length?",
+answers: ["0.5 m", "0.05 m", "0.05 cm"],
+correct: "0.05 m"
+},
+
+{
+type: "word",
+question:
+"A bag weighs 8 kg. What is 0.01 of its weight?",
+answers: ["0.8 kg", "0.08 kg", "0.008 kg"],
+correct: "0.08 kg"
+},
+
+{
+type: "word",
+question:
+"A school has 500 students. What is 0.01 of the number of students?",
+answers: ["5", "50", "0.5"],
+correct: "5"
+},
+
+{
+type: "word",
+question:
+"A ₹200 item is discounted by an amount equal to 0.1 of its price. What is the discount?",
+answers: ["₹2", "₹20", "₹200"],
+correct: "₹20"
+},
+
+{
+type: "word",
+question:
+"A 100 cm strip is cut into 100 equal pieces. How long is one piece?",
+answers: ["1 cm", "0.1 cm", "10 cm"],
+correct: "1 cm"
 }
 
 ];
 
 
-/* =====================================================
-   QUIZ VARIABLES
-   ===================================================== */
-
+/* ==================================================
+   VARIABLES
+================================================== */
 
 let currentQuestion = 0;
 
@@ -1077,323 +974,282 @@ let score = 0;
 let answered = false;
 
 
-/* =====================================================
+/* ==================================================
    START QUIZ
-   ===================================================== */
-
+================================================== */
 
 function startQuiz() {
 
-document
-.getElementById("learnSection")
-.classList.add("hidden");
+    document
+    .getElementById("learnSection")
+    .classList.add("hidden");
 
+    document
+    .getElementById("quizSection")
+    .classList.remove("hidden");
 
-document
-.getElementById("quizSection")
-.classList.remove("hidden");
-
-
-showQuestion();
+    showQuestion();
 
 }
 
 
-/* =====================================================
+/* ==================================================
    SHOW QUESTION
-   ===================================================== */
-
+================================================== */
 
 function showQuestion() {
 
+    answered = false;
 
-answered = false;
+    const q = questions[currentQuestion];
 
-
-const q = questions[currentQuestion];
-
-
-let stage;
+    let stage = "";
 
 
-if (q.type === "concept") {
+    if (q.type === "concept") {
 
-stage = "🌱 Concept Practice";
+        stage = "🌱 Build the Concept";
+
+    }
+
+    else if (q.type === "multiply01") {
+
+        stage = "✖️ Multiply by 0.1";
+
+    }
+
+    else if (q.type === "multiply001") {
+
+        stage = "✖️ Multiply by 0.01";
+
+    }
+
+    else if (q.type === "practice") {
+
+        stage = "🧠 Mixed Practice";
+
+    }
+
+    else {
+
+        stage = "🌍 Word Problems";
+
+    }
+
+
+    document
+    .getElementById("questionNumber")
+    .innerText =
+    stage +
+    " • Question " +
+    (currentQuestion + 1) +
+    " of " +
+    questions.length;
+
+
+    document
+    .getElementById("question")
+    .innerText =
+    q.question;
+
+
+    document
+    .getElementById("feedback")
+    .innerText = "";
+
+
+    document
+    .getElementById("nextButton")
+    .classList.add("hidden");
+
+
+    /* PROGRESS */
+
+    const percentage =
+    ((currentQuestion + 1) /
+    questions.length) * 100;
+
+
+    document
+    .getElementById("progress")
+    .style.width =
+    percentage + "%";
+
+
+    /* ANSWERS */
+
+    const answersDiv =
+    document.getElementById("answers");
+
+    answersDiv.innerHTML = "";
+
+
+    q.answers.forEach(answer => {
+
+        const button =
+        document.createElement("button");
+
+
+        button.innerText = answer;
+
+
+        button.onclick = function() {
+
+            checkAnswer(answer, button);
+
+        };
+
+
+        answersDiv.appendChild(button);
+
+    });
 
 }
 
-else if (q.type === "practice") {
 
-stage = "🧠 Apply What You Know";
-
-}
-
-else {
-
-stage = "🌍 Word Problems";
-
-}
-
-
-document
-.getElementById("questionNumber")
-.innerText =
-
-stage +
-
-" • Question " +
-
-(currentQuestion + 1) +
-
-" of " +
-
-questions.length;
-
-
-document
-.getElementById("question")
-.innerText = q.question;
-
-
-document
-.getElementById("feedback")
-.innerText = "";
-
-
-document
-.getElementById("nextButton")
-.classList.add("hidden");
-
-
-/* PROGRESS */
-
-let percentage =
-
-((currentQuestion + 1) /
-
-questions.length) * 100;
-
-
-document
-.getElementById("progress")
-.style.width = percentage + "%";
-
-
-/* ANSWERS */
-
-const answersDiv =
-
-document.getElementById("answers");
-
-
-answersDiv.innerHTML = "";
-
-
-q.answers.forEach(answer => {
-
-
-const button =
-
-document.createElement("button");
-
-
-button.innerText = answer;
-
-
-button.onclick = function() {
-
-checkAnswer(answer, button);
-
-};
-
-
-answersDiv.appendChild(button);
-
-
-});
-
-}
-
-
-/* =====================================================
+/* ==================================================
    CHECK ANSWER
-   ===================================================== */
-
+================================================== */
 
 function checkAnswer(answer, button) {
 
+    if (answered) return;
 
-if (answered) return;
+    answered = true;
 
-
-answered = true;
-
-
-const q = questions[currentQuestion];
+    const q = questions[currentQuestion];
 
 
-if (answer === q.correct) {
+    if (answer === q.correct) {
+
+        score++;
 
 
-score++;
+        document
+        .getElementById("feedback")
+        .innerText =
+        "🎉 Correct! Great thinking!";
 
 
-document
-.getElementById("feedback")
-.innerText =
+        button.style.background =
+        "#c8f7c5";
 
-"🎉 Correct! Great thinking!";
+    }
 
+    else {
 
-button.style.background =
-
-"#c8f7c5";
-
-
-}
-
-else {
+        document
+        .getElementById("feedback")
+        .innerText =
+        "💡 Not quite. The correct answer is " +
+        q.correct;
 
 
-document
-.getElementById("feedback")
-.innerText =
+        button.style.background =
+        "#ffd0d0";
 
-"💡 Not quite. The correct answer is " +
-
-q.correct;
+    }
 
 
-button.style.background =
-
-"#ffd0d0";
-
+    document
+    .getElementById("nextButton")
+    .classList.remove("hidden");
 
 }
 
 
-/* SHOW NEXT BUTTON */
-
-document
-.getElementById("nextButton")
-.classList.remove("hidden");
-
-}
-
-
-/* =====================================================
+/* ==================================================
    NEXT QUESTION
-   ===================================================== */
-
+================================================== */
 
 function nextQuestion() {
 
-
-currentQuestion++;
-
-
-if (currentQuestion < questions.length) {
+    currentQuestion++;
 
 
-showQuestion();
+    if (currentQuestion < questions.length) {
 
+        showQuestion();
 
-}
+    }
 
-else {
+    else {
 
+        showResult();
 
-showResult();
-
-
-}
+    }
 
 }
 
 
-/* =====================================================
-   FINAL RESULT
-   ===================================================== */
-
+/* ==================================================
+   RESULT
+================================================== */
 
 function showResult() {
 
-
-document
-.getElementById("quizSection")
-.classList.add("hidden");
-
-
-document
-.getElementById("resultSection")
-.classList.remove("hidden");
+    document
+    .getElementById("quizSection")
+    .classList.add("hidden");
 
 
-document
-.getElementById("score")
-.innerText =
-
-score +
-
-" / " +
-
-questions.length;
+    document
+    .getElementById("resultSection")
+    .classList.remove("hidden");
 
 
-let message;
+    document
+    .getElementById("score")
+    .innerText =
+    score +
+    " / " +
+    questions.length;
 
 
-let percentage =
-
-(score / questions.length) * 100;
-
-
-if (percentage >= 90) {
+    const percentage =
+    (score / questions.length) * 100;
 
 
-message =
-
-"🌟 Excellent! You have a strong understanding of tenths.";
-
-}
-
-else if (percentage >= 70) {
+    let message;
 
 
-message =
+    if (percentage >= 90) {
 
-"👏 Good work! You understand the concept. A little more practice will make you even stronger.";
+        message =
+        "🌟 Excellent! You have a strong understanding of decimals and multiplication by 0.1 and 0.01.";
 
-}
+    }
 
-else if (percentage >= 50) {
+    else if (percentage >= 75) {
+
+        message =
+        "👏 Great work! You understand the main ideas. A little more practice will make you even stronger.";
+
+    }
+
+    else if (percentage >= 50) {
+
+        message =
+        "👍 Good start! Review the learning steps and practise multiplying by 0.1 and 0.01 again.";
+
+    }
+
+    else {
+
+        message =
+        "💪 Keep going! Revisit the concept section and try the questions again.";
+
+    }
 
 
-message =
-
-"👍 You're getting there! Review the idea of tenths and try again.";
-
-}
-
-else {
-
-
-message =
-
-"💪 Keep practising! Let's revisit the learning section and try again.";
+    document
+    .getElementById("resultMessage")
+    .innerText =
+    message;
 
 }
-
-
-document
-.getElementById("resultMessage")
-.innerText = message;
-
-}
-
 
 </script>
-
 
 </body>
 
