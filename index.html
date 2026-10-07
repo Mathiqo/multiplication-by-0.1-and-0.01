@@ -6,166 +6,279 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MathIQ - Decimals & Multiplication</title>
+<title>MathIQ | Decimals & Multiplication</title>
 
 <style>
 
-/* =========================
-   GENERAL
-========================= */
+/* =====================================================
+   BASIC
+===================================================== */
 
 * {
     box-sizing: border-box;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background: #f4f6ff;
     margin: 0;
-    padding: 20px;
-    color: #333;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f3f5ff;
+    color: #25283d;
 }
 
 .container {
-    max-width: 800px;
-    margin: auto;
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 25px 15px;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.logo {
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.card {
     background: white;
+    border-radius: 25px;
     padding: 35px;
-    border-radius: 22px;
-    box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    min-height: 500px;
+}
+
+
+/* =====================================================
+   SLIDE
+===================================================== */
+
+.slide {
+    display: none;
+}
+
+.slide.active {
+    display: block;
+}
+
+.slide-number {
+    text-align: center;
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 12px;
 }
 
 h1 {
     text-align: center;
-    margin-bottom: 30px;
+    font-size: 32px;
 }
 
 h2 {
-    margin-top: 25px;
-}
-
-h3 {
-    margin-top: 25px;
+    text-align: center;
+    font-size: 27px;
 }
 
 p {
-    line-height: 1.6;
+    font-size: 18px;
+    line-height: 1.7;
 }
 
-
-/* =========================
-   LEARNING CARDS
-========================= */
-
-.learning-card {
-    background: #f0f2ff;
-    padding: 22px;
-    border-radius: 16px;
-    margin: 20px 0;
-}
-
-.key-point {
-    background: #fff4d6;
-    padding: 18px;
-    border-radius: 14px;
-    margin: 20px 0;
-    font-weight: bold;
-}
-
-
-/* =========================
-   DECIMAL VISUAL
-========================= */
-
-.visual {
-    display: flex;
-    justify-content: center;
-    margin: 30px 0;
-    gap: 2px;
-}
-
-.part {
-    width: 45px;
-    height: 70px;
-    border: 2px solid #333;
-    background: white;
-}
-
-.part.active {
-    background: #5b6cff;
-}
-
-
-/* =========================
-   EQUATIONS
-========================= */
-
-.equation {
+.center {
     text-align: center;
-    font-size: 32px;
-    font-weight: bold;
-    margin: 25px;
 }
 
 
-/* =========================
-   PROGRESS
-========================= */
+/* =====================================================
+   LEARNING PROGRESS
+===================================================== */
 
-.progress-container {
+.progress-area {
     margin-bottom: 20px;
 }
 
-.progress-bar {
-    height: 12px;
-    background: #ddd;
-    border-radius: 10px;
+.progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 6px;
+}
+
+.progress-track {
+    width: 100%;
+    height: 10px;
+    background: #e3e3e3;
+    border-radius: 20px;
     overflow: hidden;
 }
 
-.progress {
+.progress-fill {
     height: 100%;
-    width: 0%;
+    width: 8%;
     background: #5b6cff;
-    transition: width 0.3s;
+    border-radius: 20px;
+    transition: width 0.4s;
 }
 
 
-/* =========================
-   QUESTIONS
-========================= */
+/* =====================================================
+   VISUAL TENTHS
+===================================================== */
 
-.stage {
-    color: #666;
-    font-weight: bold;
-    margin-top: 20px;
+.tenths {
+    display: flex;
+    justify-content: center;
+    gap: 3px;
+    margin: 35px auto;
+    max-width: 650px;
 }
 
-.question {
-    font-size: 23px;
-    line-height: 1.5;
-    margin: 25px 0;
-}
-
-
-/* =========================
-   BUTTONS
-========================= */
-
-button {
-    width: 100%;
-    padding: 15px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 11px;
-    background: #eeeeee;
-    font-size: 18px;
+.tenth {
+    height: 80px;
+    flex: 1;
+    max-width: 55px;
+    border: 2px solid #333;
+    background: white;
     cursor: pointer;
     transition: 0.2s;
 }
 
+.tenth:hover {
+    transform: translateY(-5px);
+}
+
+.tenth.selected {
+    background: #6c7cff;
+}
+
+
+/* =====================================================
+   HUNDREDTHS
+===================================================== */
+
+.hundred-grid {
+    width: 300px;
+    height: 300px;
+    margin: 25px auto;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    border: 2px solid #333;
+}
+
+.hundred-cell {
+    border: 1px solid #bbb;
+    background: white;
+    cursor: pointer;
+}
+
+.hundred-cell.selected {
+    background: #6c7cff;
+}
+
+
+/* =====================================================
+   EQUATION
+===================================================== */
+
+.equation {
+    font-size: 34px;
+    font-weight: bold;
+    text-align: center;
+    margin: 25px 0;
+}
+
+.big-answer {
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+    margin: 25px 0;
+}
+
+
+/* =====================================================
+   KEY IDEA
+===================================================== */
+
+.key-box {
+    background: #fff4cc;
+    border-radius: 18px;
+    padding: 20px;
+    margin: 25px 0;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.info-box {
+    background: #eef0ff;
+    border-radius: 18px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+
+/* =====================================================
+   STEP REVEAL
+===================================================== */
+
+.reveal {
+    display: none;
+    margin-top: 20px;
+}
+
+.reveal.show {
+    display: block;
+}
+
+
+/* =====================================================
+   CHECK QUESTIONS
+===================================================== */
+
+.check-question {
+    background: #f6f7ff;
+    padding: 25px;
+    border-radius: 18px;
+    margin-top: 25px;
+}
+
+.check-question button {
+    background: white;
+    color: #333;
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+button {
+    border: none;
+    border-radius: 14px;
+    padding: 15px 22px;
+    font-size: 17px;
+    cursor: pointer;
+    margin: 6px;
+    background: #e9e9ee;
+    transition: 0.2s;
+}
+
 button:hover {
-    background: #dfe3ff;
+    transform: translateY(-2px);
 }
 
 .primary {
@@ -174,75 +287,140 @@ button:hover {
 }
 
 .primary:hover {
-    background: #4555e8;
+    background: #4657ed;
+}
+
+.secondary {
+    background: #eeeeee;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.navigation button {
+    min-width: 130px;
 }
 
 
-/* =========================
-   FEEDBACK
-========================= */
+/* =====================================================
+   MINI CHECK
+===================================================== */
 
-.feedback {
-    min-height: 35px;
+.mini-feedback {
     text-align: center;
-    font-size: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    min-height: 30px;
+    margin-top: 10px;
+}
+
+
+/* =====================================================
+   QUIZ
+===================================================== */
+
+.quiz-question {
+    font-size: 25px;
+    line-height: 1.5;
+    margin: 30px 0;
+    text-align: center;
+}
+
+.answer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.answer-grid button {
+    background: #f0f1f7;
+    min-height: 60px;
+}
+
+.answer-grid button:hover {
+    background: #dfe3ff;
+}
+
+.quiz-feedback {
+    text-align: center;
+    min-height: 35px;
+    font-size: 19px;
     font-weight: bold;
     margin: 20px 0;
 }
 
 
-/* =========================
+/* =====================================================
    RESULT
-========================= */
+===================================================== */
 
-.score {
+.result-score {
     text-align: center;
-    font-size: 38px;
+    font-size: 55px;
     font-weight: bold;
-    margin: 30px;
+    margin: 40px 0 20px;
 }
 
 .result-message {
     text-align: center;
     font-size: 20px;
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
 
-/* =========================
+/* =====================================================
    HIDDEN
-========================= */
+===================================================== */
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 
-/* =========================
+/* =====================================================
    MOBILE
-========================= */
+===================================================== */
 
 @media (max-width: 600px) {
 
-    body {
-        padding: 10px;
+    .card {
+        padding: 22px;
     }
 
-    .container {
-        padding: 20px;
+    h1 {
+        font-size: 27px;
     }
 
-    .part {
-        width: 27px;
+    h2 {
+        font-size: 23px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    .tenths {
+        gap: 2px;
+    }
+
+    .tenth {
         height: 55px;
     }
 
-    .equation {
-        font-size: 25px;
+    .hundred-grid {
+        width: 250px;
+        height: 250px;
     }
 
-    .question {
-        font-size: 20px;
+    .answer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .equation {
+        font-size: 27px;
     }
 
 }
@@ -258,105 +436,304 @@ button:hover {
 <div class="container">
 
 
-<!-- ==================================================
+<div class="logo">🧠 MathIQ</div>
+
+<div class="subtitle">
+Learn • Explore • Practise • Master
+</div>
+
+
+<!-- =====================================================
      LEARNING SECTION
-================================================== -->
+===================================================== -->
 
-<div id="learnSection">
-
-<h1>🧠 MathIQ</h1>
+<div id="learningSection">
 
 
-<!-- =========================
-     LESSON 1
-========================= -->
+<div class="progress-area">
 
-<div class="learning-card">
+<div class="progress-label">
 
-<h2>🌟 Step 1: Understanding Tenths</h2>
+<span id="learningLabel">
+Learning
+</span>
 
-<p>
-Imagine one whole chocolate bar.
-</p>
+<span id="learningCount">
+1 / 12
+</span>
 
-<p>
-We divide it into <b>10 equal parts</b>.
-</p>
+</div>
 
+<div class="progress-track">
 
-<div class="visual">
+<div
+id="learningProgress"
+class="progress-fill">
+</div>
 
-<div class="part active"></div>
-<div class="part"></div>
-<div class="part"></div>
-<div class="part"></div>
-<div class="part"></div>
-<div class="part"></div>
-<div class="part"></div>
-<div class="part"></div>
-<div class="part"></div>
-<div class="part"></div>
+</div>
 
 </div>
 
 
-<p style="text-align:center;">
+<div class="card">
+
+
+<!-- =================================================
+     SLIDE 1
+================================================= -->
+
+<div class="slide active">
+
+<div class="slide-number">
+Step 1 of 12
+</div>
+
+<h1>👋 Let's Explore Decimals!</h1>
+
+<p class="center">
+
+Imagine you have <b>one whole chocolate bar</b>.
+
+</p>
+
+<p class="center">
+
+What happens if we share it equally between
+<b>10 people?</b>
+
+</p>
+
+<div class="equation">
+
+1 whole → 10 equal parts
+
+</div>
+
+<div class="key-box">
+
+🍫 One whole can be split into 10 equal parts.
+
+</div>
+
+<p class="center">
+
+Let's discover what each part is called!
+
+</p>
+
+</div>
+
+
+<!-- =================================================
+     SLIDE 2
+================================================= -->
+
+<div class="slide">
+
+<div class="slide-number">
+Step 2 of 12
+</div>
+
+<h2>🧩 Meet One Tenth</h2>
+
+<p class="center">
+
+Here is one whole divided into 10 equal parts.
+
+</p>
+
+<div class="tenths" id="tenthsVisual">
+
+<div class="tenth"></div>
+<div class="tenth"></div>
+<div class="tenth"></div>
+<div class="tenth"></div>
+<div class="tenth"></div>
+<div class="tenth"></div>
+<div class="tenth"></div>
+<div class="tenth"></div>
+<div class="tenth"></div>
+<div class="tenth"></div>
+
+</div>
+
+<p class="center">
+👆 Click <b>one part</b>.
+</p>
+
+<div
+id="tenthMessage"
+class="key-box">
+
+</div>
+
+</div>
+
+
+<!-- =================================================
+     SLIDE 3
+================================================= -->
+
+<div class="slide">
+
+<div class="slide-number">
+Step 3 of 12
+</div>
+
+<h2>🔢 One Tenth Has Two Forms</h2>
+
+<p class="center">
+
 One part out of ten is:
-</p>
 
+</p>
 
 <div class="equation">
+
 1/10 = 0.1
-</div>
-
-
-<div class="key-point">
-
-💡 One tenth = 0.1
 
 </div>
 
+<div class="info-box">
+
+<b>Fraction:</b> 1/10
+
+<br><br>
+
+<b>Decimal:</b> 0.1
+
+</div>
+
+<div class="key-box">
+
+💡 <b>1/10 and 0.1 are the same amount.</b>
+
+</div>
+
 </div>
 
 
-<!-- =========================
-     LESSON 2
-========================= -->
+<!-- =================================================
+     SLIDE 4
+================================================= -->
 
-<div class="learning-card">
+<div class="slide">
 
-<h2>🔎 Step 2: Understanding Hundredths</h2>
+<div class="slide-number">
+Step 4 of 12
+</div>
 
-<p>
-Now imagine a whole divided into
-<b>100 equal parts</b>.
+<h2>🌈 Let's Look at More Tenths</h2>
+
+<p class="center">
+
+Watch how the fraction changes as we shade more parts.
+
 </p>
 
-<p>
-One part out of 100 is called
+<div class="info-box">
+
+1/10 = 0.1
+
+<br>
+
+2/10 = 0.2
+
+<br>
+
+5/10 = 0.5
+
+<br>
+
+10/10 = 1
+
+</div>
+
+<div class="key-box">
+
+The number of shaded parts becomes
+the digit after the decimal point.
+
+</div>
+
+</div>
+
+
+<!-- =================================================
+     SLIDE 5
+================================================= -->
+
+<div class="slide">
+
+<div class="slide-number">
+Step 5 of 12
+</div>
+
+<h2>🔲 Now Meet Hundredths</h2>
+
+<p class="center">
+
+What if we divide a whole into
+<b>100 tiny equal parts?</b>
+
+</p>
+
+<div class="hundred-grid" id="hundredGrid">
+
+</div>
+
+<p class="center">
+
+👆 Click one tiny square.
+
+</p>
+
+<div
+id="hundredMessage"
+class="key-box">
+
+</div>
+
+</div>
+
+
+<!-- =================================================
+     SLIDE 6
+================================================= -->
+
+<div class="slide">
+
+<div class="slide-number">
+Step 6 of 12
+</div>
+
+<h2>🔎 One Hundredth</h2>
+
+<p class="center">
+
+One tiny part out of 100 is called
 <b>one hundredth</b>.
+
 </p>
 
-
 <div class="equation">
+
 1/100 = 0.01
-</div>
-
-
-<div class="key-point">
-
-💡 One hundredth = 0.01
 
 </div>
 
+<div class="info-box">
 
-<p>
-Notice the difference:
-</p>
+<b>One tenth</b>
 
-<div class="equation">
+<br>
 
 1/10 = 0.1
+
+<br><br>
+
+<b>One hundredth</b>
 
 <br>
 
@@ -364,178 +741,460 @@ Notice the difference:
 
 </div>
 
+<div class="key-box">
+
+💡 0.01 is smaller than 0.1.
+
+</div>
+
 </div>
 
 
-<!-- =========================
-     LESSON 3
-========================= -->
+<!-- =================================================
+     SLIDE 7
+================================================= -->
 
-<div class="learning-card">
+<div class="slide">
 
-<h2>✖️ Step 3: Multiplying by 0.1</h2>
+<div class="slide-number">
+Step 7 of 12
+</div>
 
-<p>
-Multiplying a number by <b>0.1</b>
-is the same as dividing it by <b>10</b>.
+<h2>🔗 Put Them Together</h2>
+
+<p class="center">
+
+Now we know:
+
 </p>
 
+<div class="equation">
+
+1/10 = 0.1
+
+<br><br>
+
+1/100 = 0.01
+
+</div>
+
+<div class="key-box">
+
+Remember:
+
+<br><br>
+
+0.1 = one tenth
+
+<br>
+
+0.01 = one hundredth
+
+</div>
+
+</div>
+
+
+<!-- =================================================
+     SLIDE 8
+================================================= -->
+
+<div class="slide">
+
+<div class="slide-number">
+Step 8 of 12
+</div>
+
+<h2>✖️ What Does × 0.1 Do?</h2>
+
+<p class="center">
+
+Let's start with:
+
+</p>
 
 <div class="equation">
+
+10 × 0.1
+
+</div>
+
+<button
+class="primary"
+onclick="showReveal('reveal01')">
+
+🔍 Show me what happens
+
+</button>
+
+<div
+id="reveal01"
+class="reveal">
+
+<div class="info-box">
+
+10 × 0.1
+
+<br><br>
+
+is the same as
+
+<br><br>
+
+10 ÷ 10
+
+<br><br>
+
+= <b>1</b>
+
+</div>
+
+<div class="big-answer">
 
 10 × 0.1 = 1
 
 </div>
 
+<div class="key-box">
 
-<div class="equation">
-
-25 × 0.1 = 2.5
-
-</div>
-
-
-<div class="equation">
-
-48 × 0.1 = 4.8
+💡 Multiplying by 0.1 means
+<b>dividing by 10.</b>
 
 </div>
-
-
-<div class="key-point">
-
-💡 × 0.1 means ÷ 10
 
 </div>
 
 </div>
 
 
-<!-- =========================
-     LESSON 4
-========================= -->
+<!-- =================================================
+     SLIDE 9
+================================================= -->
 
-<div class="learning-card">
+<div class="slide">
 
-<h2>✖️ Step 4: Multiplying by 0.01</h2>
+<div class="slide-number">
+Step 9 of 12
+</div>
 
-<p>
-Multiplying a number by <b>0.01</b>
-is the same as dividing it by <b>100</b>.
+<h2>🎯 Let's Try × 0.1</h2>
+
+<div class="check-question">
+
+<h3 class="center">
+
+What is 20 × 0.1?
+
+</h3>
+
+<div class="center">
+
+<button onclick="miniCheck(this, '2', 'mini1')">
+2
+</button>
+
+<button onclick="miniCheck(this, '20', 'mini1')">
+20
+</button>
+
+<button onclick="miniCheck(this, '0.2', 'mini1')">
+0.2
+</button>
+
+</div>
+
+<div
+id="mini1"
+class="mini-feedback">
+</div>
+
+</div>
+
+<div class="key-box">
+
+💡 Think: 20 ÷ 10 = ?
+
+</div>
+
+</div>
+
+
+<!-- =================================================
+     SLIDE 10
+================================================= -->
+
+<div class="slide">
+
+<div class="slide-number">
+Step 10 of 12
+</div>
+
+<h2>✖️ What Does × 0.01 Do?</h2>
+
+<p class="center">
+
+Now let's look at:
+
 </p>
 
-
 <div class="equation">
+
+10 × 0.01
+
+</div>
+
+<button
+class="primary"
+onclick="showReveal('reveal001')">
+
+🔍 Show me what happens
+
+</button>
+
+<div
+id="reveal001"
+class="reveal">
+
+<div class="info-box">
+
+10 × 0.01
+
+<br><br>
+
+is the same as
+
+<br><br>
+
+10 ÷ 100
+
+<br><br>
+
+= <b>0.1</b>
+
+</div>
+
+<div class="big-answer">
 
 10 × 0.01 = 0.1
 
 </div>
 
+<div class="key-box">
 
-<div class="equation">
-
-25 × 0.01 = 0.25
-
-</div>
-
-
-<div class="equation">
-
-48 × 0.01 = 0.48
+💡 Multiplying by 0.01 means
+<b>dividing by 100.</b>
 
 </div>
-
-
-<div class="key-point">
-
-💡 × 0.01 means ÷ 100
 
 </div>
 
 </div>
 
 
-<!-- =========================
-     QUICK CHECK
-========================= -->
+<!-- =================================================
+     SLIDE 11
+================================================= -->
 
-<div class="learning-card">
+<div class="slide">
 
-<h2>🧠 Remember</h2>
+<div class="slide-number">
+Step 11 of 12
+</div>
 
-<p>
-<b>× 0.1</b> → divide by 10
+<h2>🧠 Compare Them</h2>
+
+<div class="info-box center">
+
+<b>× 0.1</b>
+
+<br>
+
+means ÷ 10
+
+<br><br>
+
+<b>× 0.01</b>
+
+<br>
+
+means ÷ 100
+
+</div>
+
+<div class="check-question">
+
+<h3 class="center">
+
+Which makes a number smaller?
+
+</h3>
+
+<div class="center">
+
+<button onclick="miniCheck(this, '0.01', 'mini2')">
+× 0.01
+</button>
+
+<button onclick="miniCheck(this, '0.1', 'mini2')">
+× 0.1
+</button>
+
+</div>
+
+<div
+id="mini2"
+class="mini-feedback">
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =================================================
+     SLIDE 12
+================================================= -->
+
+<div class="slide">
+
+<div class="slide-number">
+Step 12 of 12
+</div>
+
+<h2>🚀 You're Ready!</h2>
+
+<p class="center">
+
+You've learned:
+
 </p>
 
-<p>
-<b>× 0.01</b> → divide by 100
-</p>
+<div class="info-box">
 
-<p>
-The decimal point moves according to the
-number of zeros in the denominator.
-</p>
+✅ Tenths
+
+<br><br>
+
+✅ Hundredths
+
+<br><br>
+
+✅ 1/10 = 0.1
+
+<br><br>
+
+✅ 1/100 = 0.01
+
+<br><br>
+
+✅ × 0.1 = ÷ 10
+
+<br><br>
+
+✅ × 0.01 = ÷ 100
 
 </div>
+
+<div class="key-box">
+
+🎯 Now let's see what you can do!
+
+</div>
+
+</div>
+
+
+<!-- =================================================
+     NAVIGATION
+================================================= -->
+
+<div class="navigation">
+
+<button
+id="backButton"
+class="secondary"
+onclick="previousSlide()">
+
+← Back
+
+</button>
 
 
 <button
+id="nextButton"
 class="primary"
-onclick="startQuiz()">
+onclick="nextSlide()">
 
-I'm Ready! Start Practice →
+Next →
 
 </button>
 
 </div>
 
 
-<!-- ==================================================
+</div>
+
+</div>
+
+
+<!-- =====================================================
      QUIZ SECTION
-================================================== -->
-
-<div id="quizSection" class="hidden">
-
-<h1>🧠 MathIQ</h1>
-
-
-<div class="progress-container">
-
-<div class="progress-bar">
+===================================================== -->
 
 <div
-id="progress"
-class="progress">
-</div>
+id="quizSection"
+class="hidden">
+
+
+<div class="progress-area">
+
+<div class="progress-label">
+
+<span>
+🎯 Challenge
+</span>
+
+<span id="quizCount">
+1 / 50
+</span>
 
 </div>
 
-</div>
-
+<div class="progress-track">
 
 <div
-id="questionNumber"
-class="stage">
+id="quizProgress"
+class="progress-fill">
 </div>
 
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2 id="quizStage">
+Practice
+</h2>
 
 <div
-id="question"
-class="question">
+id="quizQuestion"
+class="quiz-question">
 </div>
-
-
-<div id="answers"></div>
-
 
 <div
-id="feedback"
-class="feedback">
+id="answerButtons"
+class="answer-grid">
 </div>
 
+<div
+id="quizFeedback"
+class="quiz-feedback">
+</div>
 
 <button
-id="nextButton"
+id="quizNext"
 class="primary hidden"
 onclick="nextQuestion()">
 
@@ -545,37 +1204,48 @@ Next Question →
 
 </div>
 
+</div>
 
-<!-- ==================================================
-     RESULT SECTION
-================================================== -->
+
+<!-- =====================================================
+     RESULT
+===================================================== -->
 
 <div
 id="resultSection"
 class="hidden">
 
-<h1>🎉 Lesson Complete!</h1>
+<div class="card">
 
+<h1>🎉 Amazing Work!</h1>
 
 <div
-id="score"
-class="score">
+id="resultScore"
+class="result-score">
 </div>
-
 
 <div
 id="resultMessage"
 class="result-message">
 </div>
 
+<div class="key-box">
+
+You completed the MathIQ
+Decimals & Multiplication lesson!
+
+</div>
 
 <button
 class="primary"
-onclick="location.reload()">
+onclick="location.reload()"
+style="display:block;margin:25px auto;">
 
-Try Again
+🔄 Try Again
 
 </button>
+
+</div>
 
 </div>
 
@@ -586,484 +1256,652 @@ Try Again
 <script>
 
 
-/* ==================================================
-   QUESTION BANK
-================================================== */
+/* =====================================================
+   LEARNING SLIDES
+===================================================== */
 
+let currentSlide = 0;
+
+const totalSlides = 12;
+
+const slides =
+document.querySelectorAll(".slide");
+
+
+function updateLearningProgress() {
+
+    const percentage =
+    ((currentSlide + 1) / totalSlides) * 100;
+
+    document
+    .getElementById("learningProgress")
+    .style.width =
+    percentage + "%";
+
+
+    document
+    .getElementById("learningCount")
+    .innerText =
+    (currentSlide + 1) +
+    " / " +
+    totalSlides;
+
+
+    document
+    .querySelectorAll(".slide")
+    .forEach((slide, index) => {
+
+        slide.classList.toggle(
+            "active",
+            index === currentSlide
+        );
+
+    });
+
+
+    const back =
+    document.getElementById("backButton");
+
+    const next =
+    document.getElementById("nextButton");
+
+
+    back.style.visibility =
+    currentSlide === 0
+    ? "hidden"
+    : "visible";
+
+
+    if (currentSlide === totalSlides - 1) {
+
+        next.innerText =
+        "Start Challenge 🚀";
+
+    }
+
+    else {
+
+        next.innerText =
+        "Next →";
+
+    }
+
+}
+
+
+function nextSlide() {
+
+    if (currentSlide < totalSlides - 1) {
+
+        currentSlide++;
+
+        updateLearningProgress();
+
+    }
+
+    else {
+
+        startQuiz();
+
+    }
+
+}
+
+
+function previousSlide() {
+
+    if (currentSlide > 0) {
+
+        currentSlide--;
+
+        updateLearningProgress();
+
+    }
+
+}
+
+
+/* =====================================================
+   TENTHS INTERACTION
+===================================================== */
+
+const tenthParts =
+document.querySelectorAll(".tenth");
+
+
+tenthParts.forEach((part, index) => {
+
+    part.addEventListener("click", function() {
+
+        tenthParts.forEach(p =>
+            p.classList.remove("selected")
+        );
+
+
+        part.classList.add("selected");
+
+
+        document
+        .getElementById("tenthMessage")
+        .innerHTML =
+        "🌟 You selected <b>1 out of 10 parts</b>.<br><br>" +
+        "That is <b>1/10 = 0.1</b>!";
+
+    });
+
+});
+
+
+/* =====================================================
+   HUNDREDTHS INTERACTION
+===================================================== */
+
+const hundredGrid =
+document.getElementById("hundredGrid");
+
+
+for (let i = 0; i < 100; i++) {
+
+    const cell =
+    document.createElement("div");
+
+    cell.className =
+    "hundred-cell";
+
+
+    cell.addEventListener("click", function() {
+
+        document
+        .querySelectorAll(".hundred-cell")
+        .forEach(c =>
+            c.classList.remove("selected")
+        );
+
+
+        cell.classList.add("selected");
+
+
+        document
+        .getElementById("hundredMessage")
+        .innerHTML =
+        "🔎 You selected <b>1 tiny part out of 100</b>.<br><br>" +
+        "That is <b>1/100 = 0.01</b>!";
+
+    });
+
+
+    hundredGrid.appendChild(cell);
+
+}
+
+
+/* =====================================================
+   REVEAL
+===================================================== */
+
+function showReveal(id) {
+
+    document
+    .getElementById(id)
+    .classList.add("show");
+
+}
+
+
+/* =====================================================
+   MINI CHECK
+===================================================== */
+
+function miniCheck(button, answer, feedbackId) {
+
+    const feedback =
+    document.getElementById(feedbackId);
+
+
+    if (
+        (feedbackId === "mini1" && answer === "2") ||
+        (feedbackId === "mini2" && answer === "0.01")
+    ) {
+
+        feedback.innerHTML =
+        "🎉 Correct! Great thinking!";
+
+        feedback.style.color =
+        "#218838";
+
+    }
+
+    else {
+
+        feedback.innerHTML =
+        "💡 Not quite. Think about dividing by 10 or 100.";
+
+        feedback.style.color =
+        "#d35400";
+
+    }
+
+}
+
+
+/* =====================================================
+   QUESTION BANK
+===================================================== */
 
 const questions = [
 
-/* ================================================
-   PART A — TENTHS
-================================================ */
-
+/* ---------- CONCEPT ---------- */
 
 {
-type: "concept",
-question: "What is 1/10 as a decimal?",
-answers: ["0.01", "0.1", "1"],
-correct: "0.1"
+stage:"🌱 Build the Concept",
+question:"What is 1/10 as a decimal?",
+answers:["0.01","0.1","1"],
+correct:"0.1"
 },
 
 {
-type: "concept",
-question: "What is 2/10 as a decimal?",
-answers: ["0.02", "0.2", "2"],
-correct: "0.2"
+stage:"🌱 Build the Concept",
+question:"What is 2/10 as a decimal?",
+answers:["0.02","0.2","2"],
+correct:"0.2"
 },
 
 {
-type: "concept",
-question: "What is 5/10 as a decimal?",
-answers: ["0.05", "0.5", "5"],
-correct: "0.5"
+stage:"🌱 Build the Concept",
+question:"What is 5/10 as a decimal?",
+answers:["0.05","0.5","5"],
+correct:"0.5"
 },
 
 {
-type: "concept",
-question: "What is 8/10 as a decimal?",
-answers: ["0.08", "0.8", "8"],
-correct: "0.8"
+stage:"🌱 Build the Concept",
+question:"What is 8/10 as a decimal?",
+answers:["0.08","0.8","8"],
+correct:"0.8"
 },
 
 {
-type: "concept",
-question: "Which fraction is equal to 0.3?",
-answers: ["3/10", "3/100", "30/10"],
-correct: "3/10"
+stage:"🌱 Build the Concept",
+question:"Which fraction is equal to 0.3?",
+answers:["3/10","3/100","30/10"],
+correct:"3/10"
 },
 
-
-/* ================================================
-   PART B — HUNDREDTHS
-================================================ */
-
+/* ---------- HUNDREDTHS ---------- */
 
 {
-type: "concept",
-question: "What is 1/100 as a decimal?",
-answers: ["0.1", "0.01", "1"],
-correct: "0.01"
+stage:"🔎 Hundredths",
+question:"What is 1/100 as a decimal?",
+answers:["0.1","0.01","1"],
+correct:"0.01"
 },
 
 {
-type: "concept",
-question: "What is 5/100 as a decimal?",
-answers: ["0.5", "0.05", "5"],
-correct: "0.05"
+stage:"🔎 Hundredths",
+question:"What is 5/100 as a decimal?",
+answers:["0.5","0.05","5"],
+correct:"0.05"
 },
 
 {
-type: "concept",
-question: "What is 25/100 as a decimal?",
-answers: ["0.25", "2.5", "0.025"],
-correct: "0.25"
+stage:"🔎 Hundredths",
+question:"What is 25/100 as a decimal?",
+answers:["0.25","2.5","0.025"],
+correct:"0.25"
 },
 
 {
-type: "concept",
-question: "Which fraction is equal to 0.07?",
-answers: ["7/10", "7/100", "70/100"],
-correct: "7/100"
+stage:"🔎 Hundredths",
+question:"Which fraction is equal to 0.07?",
+answers:["7/10","7/100","70/100"],
+correct:"7/100"
 },
 
 {
-type: "concept",
-question: "Which is smaller?",
-answers: ["0.1", "0.01", "They are equal"],
-correct: "0.01"
+stage:"🔎 Hundredths",
+question:"Which is smaller?",
+answers:["0.1","0.01","They are equal"],
+correct:"0.01"
 },
 
-
-/* ================================================
-   PART C — MULTIPLY BY 0.1
-================================================ */
-
+/* ---------- × 0.1 ---------- */
 
 {
-type: "multiply01",
-question: "What is 10 × 0.1?",
-answers: ["0.1", "1", "10"],
-correct: "1"
+stage:"✖️ Multiply by 0.1",
+question:"What is 10 × 0.1?",
+answers:["0.1","1","10"],
+correct:"1"
 },
 
 {
-type: "multiply01",
-question: "What is 20 × 0.1?",
-answers: ["2", "0.2", "20"],
-correct: "2"
+stage:"✖️ Multiply by 0.1",
+question:"What is 20 × 0.1?",
+answers:["2","0.2","20"],
+correct:"2"
 },
 
 {
-type: "multiply01",
-question: "What is 50 × 0.1?",
-answers: ["5", "0.5", "50"],
-correct: "5"
+stage:"✖️ Multiply by 0.1",
+question:"What is 50 × 0.1?",
+answers:["5","0.5","50"],
+correct:"5"
 },
 
 {
-type: "multiply01",
-question: "What is 25 × 0.1?",
-answers: ["25", "0.25", "2.5"],
-correct: "2.5"
+stage:"✖️ Multiply by 0.1",
+question:"What is 25 × 0.1?",
+answers:["25","0.25","2.5"],
+correct:"2.5"
 },
 
 {
-type: "multiply01",
-question: "What is 48 × 0.1?",
-answers: ["4.8", "0.48", "48"],
-correct: "4.8"
+stage:"✖️ Multiply by 0.1",
+question:"What is 48 × 0.1?",
+answers:["4.8","0.48","48"],
+correct:"4.8"
 },
 
 {
-type: "multiply01",
-question: "What is 73 × 0.1?",
-answers: ["7.3", "0.73", "73"],
-correct: "7.3"
+stage:"✖️ Multiply by 0.1",
+question:"What is 73 × 0.1?",
+answers:["7.3","0.73","73"],
+correct:"7.3"
 },
 
 {
-type: "multiply01",
-question: "What is 6 × 0.1?",
-answers: ["0.06", "0.6", "6"],
-correct: "0.6"
+stage:"✖️ Multiply by 0.1",
+question:"What is 6 × 0.1?",
+answers:["0.06","0.6","6"],
+correct:"0.6"
 },
 
 {
-type: "multiply01",
-question: "What is 3.5 × 0.1?",
-answers: ["0.35", "3.5", "0.035"],
-correct: "0.35"
+stage:"✖️ Multiply by 0.1",
+question:"What is 3.5 × 0.1?",
+answers:["0.35","3.5","0.035"],
+correct:"0.35"
 },
 
-
-/* ================================================
-   PART D — MULTIPLY BY 0.01
-================================================ */
-
+/* ---------- × 0.01 ---------- */
 
 {
-type: "multiply001",
-question: "What is 10 × 0.01?",
-answers: ["1", "0.1", "0.01"],
-correct: "0.1"
+stage:"✖️ Multiply by 0.01",
+question:"What is 10 × 0.01?",
+answers:["1","0.1","0.01"],
+correct:"0.1"
 },
 
 {
-type: "multiply001",
-question: "What is 20 × 0.01?",
-answers: ["2", "0.2", "0.02"],
-correct: "0.2"
+stage:"✖️ Multiply by 0.01",
+question:"What is 20 × 0.01?",
+answers:["2","0.2","0.02"],
+correct:"0.2"
 },
 
 {
-type: "multiply001",
-question: "What is 50 × 0.01?",
-answers: ["5", "0.5", "0.05"],
-correct: "0.5"
+stage:"✖️ Multiply by 0.01",
+question:"What is 50 × 0.01?",
+answers:["5","0.5","0.05"],
+correct:"0.5"
 },
 
 {
-type: "multiply001",
-question: "What is 25 × 0.01?",
-answers: ["0.25", "2.5", "0.025"],
-correct: "0.25"
+stage:"✖️ Multiply by 0.01",
+question:"What is 25 × 0.01?",
+answers:["0.25","2.5","0.025"],
+correct:"0.25"
 },
 
 {
-type: "multiply001",
-question: "What is 48 × 0.01?",
-answers: ["4.8", "0.48", "0.048"],
-correct: "0.48"
+stage:"✖️ Multiply by 0.01",
+question:"What is 48 × 0.01?",
+answers:["4.8","0.48","0.048"],
+correct:"0.48"
 },
 
 {
-type: "multiply001",
-question: "What is 73 × 0.01?",
-answers: ["7.3", "0.73", "0.073"],
-correct: "0.73"
+stage:"✖️ Multiply by 0.01",
+question:"What is 73 × 0.01?",
+answers:["7.3","0.73","0.073"],
+correct:"0.73"
 },
 
 {
-type: "multiply001",
-question: "What is 6 × 0.01?",
-answers: ["0.6", "0.06", "0.006"],
-correct: "0.06"
+stage:"✖️ Multiply by 0.01",
+question:"What is 6 × 0.01?",
+answers:["0.6","0.06","0.006"],
+correct:"0.06"
 },
 
 {
-type: "multiply001",
-question: "What is 3.5 × 0.01?",
-answers: ["0.35", "0.035", "0.0035"],
-correct: "0.035"
+stage:"✖️ Multiply by 0.01",
+question:"What is 3.5 × 0.01?",
+answers:["0.35","0.035","0.0035"],
+correct:"0.035"
 },
 
-
-/* ================================================
-   PART E — MIXED PRACTICE
-================================================ */
-
+/* ---------- MIXED ---------- */
 
 {
-type: "practice",
-question: "Which is equal to 30 × 0.1?",
-answers: ["3", "0.3", "30"],
-correct: "3"
+stage:"🧠 Mixed Practice",
+question:"What is 30 × 0.1?",
+answers:["3","0.3","30"],
+correct:"3"
 },
 
 {
-type: "practice",
-question: "Which is equal to 30 × 0.01?",
-answers: ["3", "0.3", "0.03"],
-correct: "0.3"
+stage:"🧠 Mixed Practice",
+question:"What is 30 × 0.01?",
+answers:["3","0.3","0.03"],
+correct:"0.3"
 },
 
 {
-type: "practice",
-question: "Which is greater?",
-answers: ["0.1", "0.01", "They are equal"],
-correct: "0.1"
+stage:"🧠 Mixed Practice",
+question:"Which is greater?",
+answers:["0.1","0.01","They are equal"],
+correct:"0.1"
 },
 
 {
-type: "practice",
-question: "Which is greater?",
-answers: ["5 × 0.1", "5 × 0.01", "They are equal"],
-correct: "5 × 0.1"
+stage:"🧠 Mixed Practice",
+question:"Which is greater?",
+answers:["5 × 0.1","5 × 0.01","They are equal"],
+correct:"5 × 0.1"
 },
 
 {
-type: "practice",
-question: "What is 100 × 0.1?",
-answers: ["1", "10", "100"],
-correct: "10"
+stage:"🧠 Mixed Practice",
+question:"What is 100 × 0.1?",
+answers:["1","10","100"],
+correct:"10"
 },
 
 {
-type: "practice",
-question: "What is 100 × 0.01?",
-answers: ["1", "10", "0.1"],
-correct: "1"
+stage:"🧠 Mixed Practice",
+question:"What is 100 × 0.01?",
+answers:["1","10","0.1"],
+correct:"1"
 },
 
 {
-type: "practice",
-question: "What is 2.5 × 0.1?",
-answers: ["0.25", "0.025", "2.5"],
-correct: "0.25"
+stage:"🧠 Mixed Practice",
+question:"What is 2.5 × 0.1?",
+answers:["0.25","0.025","2.5"],
+correct:"0.25"
 },
 
 {
-type: "practice",
-question: "What is 2.5 × 0.01?",
-answers: ["0.25", "0.025", "0.0025"],
-correct: "0.025"
+stage:"🧠 Mixed Practice",
+question:"What is 2.5 × 0.01?",
+answers:["0.25","0.025","0.0025"],
+correct:"0.025"
 },
 
 {
-type: "practice",
-question: "Which expression means divide by 100?",
-answers: ["× 0.1", "× 0.01", "× 10"],
-correct: "× 0.01"
+stage:"🧠 Mixed Practice",
+question:"Which means divide by 100?",
+answers:["× 0.1","× 0.01","× 10"],
+correct:"× 0.01"
 },
 
 {
-type: "practice",
-question: "Which expression means divide by 10?",
-answers: ["× 0.1", "× 0.01", "× 10"],
-correct: "× 0.1"
+stage:"🧠 Mixed Practice",
+question:"Which means divide by 10?",
+answers:["× 0.1","× 0.01","× 10"],
+correct:"× 0.1"
 },
 
-
-/* ================================================
-   PART F — WORD PROBLEMS
-================================================ */
-
+/* ---------- WORD PROBLEMS ---------- */
 
 {
-type: "word",
-question:
-"A notebook costs ₹50. What is 0.1 of its price?",
-answers: ["₹5", "₹0.5", "₹50"],
-correct: "₹5"
+stage:"🌍 Word Problem",
+question:"A notebook costs ₹50. What is 0.1 of its price?",
+answers:["₹5","₹0.5","₹50"],
+correct:"₹5"
 },
 
 {
-type: "word",
-question:
-"A 40 cm ribbon is divided into 10 equal parts. How long is one part?",
-answers: ["4 cm", "0.4 cm", "40 cm"],
-correct: "4 cm"
+stage:"🌍 Word Problem",
+question:"A 40 cm ribbon is divided into 10 equal parts. How long is one part?",
+answers:["4 cm","0.4 cm","40 cm"],
+correct:"4 cm"
 },
 
 {
-type: "word",
-question:
-"A bottle contains 2 litres of water. What is 0.1 of 2 litres?",
-answers: ["0.2 L", "0.02 L", "2 L"],
-correct: "0.2 L"
+stage:"🌍 Word Problem",
+question:"A bottle contains 2 litres. What is 0.1 of 2 litres?",
+answers:["0.2 L","0.02 L","2 L"],
+correct:"0.2 L"
 },
 
 {
-type: "word",
-question:
-"A runner runs 60 km. What is 0.1 of the distance?",
-answers: ["6 km", "0.6 km", "60 km"],
-correct: "6 km"
+stage:"🌍 Word Problem",
+question:"A runner runs 60 km. What is 0.1 of the distance?",
+answers:["6 km","0.6 km","60 km"],
+correct:"6 km"
 },
 
 {
-type: "word",
-question:
-"A shop has 300 apples. What is 0.1 of the apples?",
-answers: ["3", "30", "300"],
-correct: "30"
+stage:"🌍 Word Problem",
+question:"A shop has 300 apples. What is 0.1 of the apples?",
+answers:["3","30","300"],
+correct:"30"
 },
 
 {
-type: "word",
-question:
-"A rope is 5 metres long. What is 0.01 of its length?",
-answers: ["0.5 m", "0.05 m", "0.05 cm"],
-correct: "0.05 m"
+stage:"🌍 Word Problem",
+question:"A rope is 5 metres long. What is 0.01 of its length?",
+answers:["0.5 m","0.05 m","0.005 m"],
+correct:"0.05 m"
 },
 
 {
-type: "word",
-question:
-"A bag weighs 8 kg. What is 0.01 of its weight?",
-answers: ["0.8 kg", "0.08 kg", "0.008 kg"],
-correct: "0.08 kg"
+stage:"🌍 Word Problem",
+question:"A bag weighs 8 kg. What is 0.01 of its weight?",
+answers:["0.8 kg","0.08 kg","0.008 kg"],
+correct:"0.08 kg"
 },
 
 {
-type: "word",
-question:
-"A school has 500 students. What is 0.01 of the number of students?",
-answers: ["5", "50", "0.5"],
-correct: "5"
+stage:"🌍 Word Problem",
+question:"A school has 500 students. What is 0.01 of the number?",
+answers:["5","50","0.5"],
+correct:"5"
 },
 
 {
-type: "word",
-question:
-"A ₹200 item is discounted by an amount equal to 0.1 of its price. What is the discount?",
-answers: ["₹2", "₹20", "₹200"],
-correct: "₹20"
+stage:"🌍 Word Problem",
+question:"A ₹200 item has a discount equal to 0.1 of its price. What is the discount?",
+answers:["₹2","₹20","₹200"],
+correct:"₹20"
 },
 
 {
-type: "word",
-question:
-"A 100 cm strip is cut into 100 equal pieces. How long is one piece?",
-answers: ["1 cm", "0.1 cm", "10 cm"],
-correct: "1 cm"
+stage:"🌍 Word Problem",
+question:"A 100 cm strip is cut into 100 equal pieces. How long is one piece?",
+answers:["1 cm","0.1 cm","10 cm"],
+correct:"1 cm"
 }
 
 ];
 
 
-/* ==================================================
-   VARIABLES
-================================================== */
+/* =====================================================
+   QUIZ VARIABLES
+===================================================== */
 
 let currentQuestion = 0;
 
 let score = 0;
 
-let answered = false;
+let questionAnswered = false;
 
 
-/* ==================================================
+/* =====================================================
    START QUIZ
-================================================== */
+===================================================== */
 
 function startQuiz() {
 
     document
-    .getElementById("learnSection")
+    .getElementById("learningSection")
     .classList.add("hidden");
+
 
     document
     .getElementById("quizSection")
     .classList.remove("hidden");
+
 
     showQuestion();
 
 }
 
 
-/* ==================================================
+/* =====================================================
    SHOW QUESTION
-================================================== */
+===================================================== */
 
 function showQuestion() {
 
-    answered = false;
-
-    const q = questions[currentQuestion];
-
-    let stage = "";
+    questionAnswered = false;
 
 
-    if (q.type === "concept") {
-
-        stage = "🌱 Build the Concept";
-
-    }
-
-    else if (q.type === "multiply01") {
-
-        stage = "✖️ Multiply by 0.1";
-
-    }
-
-    else if (q.type === "multiply001") {
-
-        stage = "✖️ Multiply by 0.01";
-
-    }
-
-    else if (q.type === "practice") {
-
-        stage = "🧠 Mixed Practice";
-
-    }
-
-    else {
-
-        stage = "🌍 Word Problems";
-
-    }
+    const q =
+    questions[currentQuestion];
 
 
     document
-    .getElementById("questionNumber")
+    .getElementById("quizStage")
     .innerText =
-    stage +
-    " • Question " +
+    q.stage;
+
+
+    document
+    .getElementById("quizCount")
+    .innerText =
     (currentQuestion + 1) +
-    " of " +
+    " / " +
     questions.length;
 
 
     document
-    .getElementById("question")
+    .getElementById("quizQuestion")
     .innerText =
     q.question;
 
 
     document
-    .getElementById("feedback")
-    .innerText = "";
+    .getElementById("quizFeedback")
+    .innerText =
+    "";
 
 
     document
-    .getElementById("nextButton")
+    .getElementById("quizNext")
     .classList.add("hidden");
 
-
-    /* PROGRESS */
 
     const percentage =
     ((currentQuestion + 1) /
@@ -1071,17 +1909,18 @@ function showQuestion() {
 
 
     document
-    .getElementById("progress")
+    .getElementById("quizProgress")
     .style.width =
     percentage + "%";
 
 
-    /* ANSWERS */
+    const answerArea =
+    document.getElementById(
+        "answerButtons"
+    );
 
-    const answersDiv =
-    document.getElementById("answers");
 
-    answersDiv.innerHTML = "";
+    answerArea.innerHTML = "";
 
 
     q.answers.forEach(answer => {
@@ -1090,34 +1929,48 @@ function showQuestion() {
         document.createElement("button");
 
 
-        button.innerText = answer;
+        button.innerText =
+        answer;
 
 
-        button.onclick = function() {
+        button.onclick =
+        function() {
 
-            checkAnswer(answer, button);
+            checkAnswer(
+                answer,
+                button
+            );
 
         };
 
 
-        answersDiv.appendChild(button);
+        answerArea.appendChild(
+            button
+        );
 
     });
 
 }
 
 
-/* ==================================================
+/* =====================================================
    CHECK ANSWER
-================================================== */
+===================================================== */
 
-function checkAnswer(answer, button) {
+function checkAnswer(
+    answer,
+    button
+) {
 
-    if (answered) return;
+    if (questionAnswered)
+        return;
 
-    answered = true;
 
-    const q = questions[currentQuestion];
+    questionAnswered = true;
+
+
+    const q =
+    questions[currentQuestion];
 
 
     if (answer === q.correct) {
@@ -1125,49 +1978,52 @@ function checkAnswer(answer, button) {
         score++;
 
 
-        document
-        .getElementById("feedback")
-        .innerText =
-        "🎉 Correct! Great thinking!";
-
-
         button.style.background =
         "#c8f7c5";
+
+
+        document
+        .getElementById("quizFeedback")
+        .innerText =
+        "🎉 Correct! Excellent thinking!";
 
     }
 
     else {
 
-        document
-        .getElementById("feedback")
-        .innerText =
-        "💡 Not quite. The correct answer is " +
-        q.correct;
-
-
         button.style.background =
         "#ffd0d0";
+
+
+        document
+        .getElementById("quizFeedback")
+        .innerText =
+        "💡 Not quite. The answer is " +
+        q.correct;
 
     }
 
 
     document
-    .getElementById("nextButton")
+    .getElementById("quizNext")
     .classList.remove("hidden");
 
 }
 
 
-/* ==================================================
+/* =====================================================
    NEXT QUESTION
-================================================== */
+===================================================== */
 
 function nextQuestion() {
 
     currentQuestion++;
 
 
-    if (currentQuestion < questions.length) {
+    if (
+        currentQuestion <
+        questions.length
+    ) {
 
         showQuestion();
 
@@ -1182,9 +2038,9 @@ function nextQuestion() {
 }
 
 
-/* ==================================================
+/* =====================================================
    RESULT
-================================================== */
+===================================================== */
 
 function showResult() {
 
@@ -1199,7 +2055,7 @@ function showResult() {
 
 
     document
-    .getElementById("score")
+    .getElementById("resultScore")
     .innerText =
     score +
     " / " +
@@ -1216,28 +2072,28 @@ function showResult() {
     if (percentage >= 90) {
 
         message =
-        "🌟 Excellent! You have a strong understanding of decimals and multiplication by 0.1 and 0.01.";
+        "🌟 Outstanding! You have mastered tenths, hundredths, ×0.1 and ×0.01.";
 
     }
 
     else if (percentage >= 75) {
 
         message =
-        "👏 Great work! You understand the main ideas. A little more practice will make you even stronger.";
+        "👏 Great work! You have a strong understanding. A little more practice will make you even stronger.";
 
     }
 
     else if (percentage >= 50) {
 
         message =
-        "👍 Good start! Review the learning steps and practise multiplying by 0.1 and 0.01 again.";
+        "👍 Good start! Review the learning slides and practise the concepts once more.";
 
     }
 
     else {
 
         message =
-        "💪 Keep going! Revisit the concept section and try the questions again.";
+        "💪 Keep practising! Go back through the learning slides and try again.";
 
     }
 
@@ -1248,6 +2104,13 @@ function showResult() {
     message;
 
 }
+
+
+/* =====================================================
+   START
+===================================================== */
+
+updateLearningProgress();
 
 </script>
 
