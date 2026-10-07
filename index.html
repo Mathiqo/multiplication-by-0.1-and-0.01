@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mathiq — The Decimal Bakery</title>
+  <title>Mathiq — Active Decimal Place Value</title>
   <style>
     :root {
       --bg: #fdfbf7;
@@ -34,11 +34,7 @@
       border: 1px solid var(--border);
     }
 
-    header {
-      text-align: center;
-      margin-bottom: 1.5rem;
-    }
-
+    header { text-align: center; margin-bottom: 1.5rem; }
     header h1 { font-size: 2rem; color: var(--primary); margin-bottom: 0.25rem; }
     header p { color: var(--text-muted); font-size: 1.05rem; }
 
@@ -90,10 +86,7 @@
       transition: all 0.2s;
     }
 
-    .step-dot.active {
-      background: var(--primary);
-      color: white;
-    }
+    .step-dot.active { background: var(--primary); color: white; }
 
     /* Place Value Table */
     .board-wrapper { margin: 1.5rem 0; overflow-x: auto; }
@@ -165,6 +158,19 @@
 
     .task-title { font-size: 1.2rem; font-weight: 800; color: #0369a1; margin-bottom: 0.5rem; }
 
+    /* Interactive Input Styling */
+    .math-input {
+      width: 100px;
+      padding: 0.5rem;
+      font-size: 1.2rem;
+      font-weight: 800;
+      text-align: center;
+      border: 2px solid var(--secondary);
+      border-radius: 8px;
+      outline: none;
+      margin: 0.5rem;
+    }
+
     .btn {
       padding: 0.8rem 1.5rem;
       font-size: 1rem;
@@ -180,32 +186,8 @@
 
     .btn:hover { background: var(--primary-hover); transform: translateY(-1px); }
 
-    .btn-next {
-      background: var(--success);
-    }
+    .btn-next { background: var(--success); }
     .btn-next:hover { background: #15803d; }
-
-    /* Quiz Option Buttons */
-    .options-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      max-width: 300px;
-      margin: 1rem auto 0 auto;
-    }
-
-    .opt-btn {
-      padding: 0.75rem 1rem;
-      font-size: 1rem;
-      font-weight: 700;
-      background: white;
-      border: 2px solid #cbd5e1;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .opt-btn:hover { border-color: var(--primary); background: #fef3c7; }
 
     .feedback-msg {
       margin-top: 1rem;
@@ -219,7 +201,7 @@
   <div class="app-container">
     <header>
       <h1>🍞 Mathiq: The Decimal Bakery</h1>
-      <p>Discover Place Value Shifts Step-by-Step</p>
+      <p>Think, Calculate & Shift Digits Yourself!</p>
     </header>
 
     <!-- Visual Proof Header -->
@@ -239,7 +221,7 @@
     <div class="stepper">
       <div class="step-dot active" id="dot-1">1. Calculate 1/10</div>
       <div class="step-dot" id="dot-2">2. Discover 0.1</div>
-      <div class="step-dot" id="dot-3">3. Interactive Shift</div>
+      <div class="step-dot" id="dot-3">3. Solve 0.1</div>
       <div class="step-dot" id="dot-4">4. Quest Challenge</div>
     </div>
 
@@ -262,18 +244,21 @@
       </div>
     </div>
 
-    <!-- Interactive Task Container -->
+    <!-- Active Task Container -->
     <div class="task-card" id="task-card">
-      <div class="task-title" id="task-title">Step 1: Calculate 1/10 of 400g</div>
-      <p id="task-desc">Maya has <strong>400g</strong> of dough. Calculate <span class="frac-unit" style="font-size:0.9rem;"><span class="num">1</span><span class="den">10</span></span> of 400g (Divide by 10):</p>
+      <div class="task-title" id="task-title">Step 1: Solve 400 × 1/10</div>
+      <p id="task-desc">Maya has <strong>400g</strong> of dough on the board. Type the answer to take <span class="frac-unit" style="font-size:0.9rem;"><span class="num">1</span><span class="den">10</span></span> of 400g:</p>
 
       <div id="interaction-area">
-        <button class="btn" onclick="executeStep(1)">Calculate 400 × 1/10</button>
+        <div>
+          <span>400 × <span class="frac-unit" style="font-size:0.8rem;"><span class="num">1</span><span class="den">10</span></span> = </span>
+          <input type="number" id="user-input-1" class="math-input" placeholder="?" />
+        </div>
+        <button class="btn" onclick="checkStep1()">Check Answer</button>
       </div>
 
       <div class="feedback-msg" id="feedback"></div>
-      
-      <!-- Continue Button (Hidden until correct answer/action) -->
+
       <button class="btn btn-next" id="next-btn" style="display:none;" onclick="loadNextStage()">
         Continue ➔
       </button>
@@ -317,24 +302,37 @@
       slot.appendChild(card);
     }
 
-    function executeStep(s) {
+    function checkStep1() {
+      const val = document.getElementById('user-input-1').value;
       const feedback = document.getElementById('feedback');
       const nextBtn = document.getElementById('next-btn');
 
-      if (s === 1) {
+      if (parseFloat(val) === 40) {
         currentValue = 40;
         renderDigits(currentValue);
-        feedback.innerText = "✨ 400 ÷ 10 = 40g! Notice how every digit shifted 1 column to the RIGHT ➔";
+        feedback.innerText = "🎯 Correct! 400 ÷ 10 = 40. Look at the chart: every digit shifted 1 place to the RIGHT!";
         feedback.style.color = "var(--success)";
-        nextBtn.innerText = "Continue ➔";
         nextBtn.style.display = "inline-block";
-      } else if (s === 3) {
+      } else {
+        feedback.innerText = "💡 Think: What is 400 divided by 10?";
+        feedback.style.color = "var(--danger)";
+      }
+    }
+
+    function checkStep3() {
+      const val = document.getElementById('user-input-3').value;
+      const feedback = document.getElementById('feedback');
+      const nextBtn = document.getElementById('next-btn');
+
+      if (parseFloat(val) === 40) {
         currentValue = 40;
         renderDigits(currentValue);
-        feedback.innerText = "✨ 400 × 0.1 = 40g! Multiplying by 0.1 shifts digits 1 column to the RIGHT ➔";
+        feedback.innerText = "🎉 Spot on! 400 × 0.1 is 40! Multiplying by 0.1 is the exact same as taking 1/10.";
         feedback.style.color = "var(--success)";
-        nextBtn.innerText = "Continue ➔";
         nextBtn.style.display = "inline-block";
+      } else {
+        feedback.innerText = "💡 Remember: Multiplying by 0.1 is identical to dividing by 10!";
+        feedback.style.color = "var(--danger)";
       }
     }
 
@@ -349,36 +347,42 @@
       nextBtn.style.display = "none";
       stage++;
 
-      // Update dots
       document.querySelectorAll('.step-dot').forEach(d => d.classList.remove('active'));
       document.getElementById(`dot-${Math.min(stage, 4)}`).classList.add('active');
 
       if (stage === 2) {
         title.innerText = "Step 2: Connecting 1/10 to 0.1";
-        desc.innerHTML = "Since <span class='frac-unit' style='font-size:0.9rem;'><span class='num'>1</span><span class='den'>10</span></span> and <strong>0.1</strong> are identical, multiplying by <strong>0.1</strong> does the exact same thing!";
-        area.innerHTML = `<p style="font-weight:700; color:var(--primary); font-size:1.1rem; margin-top:0.5rem;">400 × 1/10 = 40<br>400 × 0.1 = 40</p>`;
-        nextBtn.innerText = "Continue ➔";
+        desc.innerHTML = "Since <span class='frac-unit' style='font-size:0.9rem;'><span class='num'>1</span><span class='den'>10</span></span> = <strong>0.1</strong>, taking 1/10 is the exact same as multiplying by 0.1!";
+        area.innerHTML = `
+          <div style="font-weight:700; color:var(--primary); font-size:1.1rem; margin:1rem 0;">
+            400 × <span class="frac-unit" style="font-size:0.8rem;"><span class="num">1</span><span class="den">10</span></span> = 40<br>
+            400 × 0.1 = ?
+          </div>
+        `;
         nextBtn.style.display = "inline-block";
       } else if (stage === 3) {
         currentValue = 400;
         renderDigits(currentValue);
-        title.innerText = "Step 3: Try Multiplying by 0.1";
-        desc.innerHTML = "Click the button below to scale <strong>400g</strong> by <strong>0.1</strong>:";
-        area.innerHTML = `<button class="btn" onclick="executeStep(3)">Multiply 400 × 0.1</button>`;
-        nextBtn.innerText = "Continue ➔";
+        title.innerText = "Step 3: Now Calculate 400 × 0.1";
+        desc.innerHTML = "Apply what you just learned! Type your calculated answer below:";
+        area.innerHTML = `
+          <div>
+            <span>400 × 0.1 = </span>
+            <input type="number" id="user-input-3" class="math-input" placeholder="?" />
+          </div>
+          <button class="btn" onclick="checkStep3()">Check Answer</button>
+        `;
       } else if (stage === 4) {
         title.innerText = "Step 4: Quest Challenge";
-        desc.innerHTML = "🍫 A chocolate bar is divided into 10 equal pieces. You take 1 piece. What decimal part did you take?";
+        desc.innerHTML = "🍫 A cookie dough bar is divided into 10 equal pieces. You take 1 piece. What decimal part did you take?";
         area.innerHTML = `
-          <div class="options-grid">
-            <button class="opt-btn" onclick="checkQuiz('0.01')">0.01</button>
-            <button class="opt-btn" onclick="checkQuiz('0.1')">0.1</button>
-            <button class="opt-btn" onclick="checkQuiz('1.0')">1.0</button>
+          <div style="margin-top:1rem;">
+            <input type="number" step="0.01" id="quiz-input" class="math-input" placeholder="0.?" />
+            <br>
+            <button class="btn" onclick="checkQuiz()">Submit Answer</button>
           </div>
         `;
-        nextBtn.innerText = "Restart Activity ↺";
       } else {
-        // Reset to beginning
         stage = 0;
         currentValue = 400;
         renderDigits(currentValue);
@@ -386,23 +390,22 @@
       }
     }
 
-    function checkQuiz(ans) {
+    function checkQuiz() {
+      const val = document.getElementById('quiz-input').value;
       const feedback = document.getElementById('feedback');
       const nextBtn = document.getElementById('next-btn');
 
-      if (ans === '0.1') {
-        feedback.innerText = "🎉 Correct! 1/10 = 0.1";
+      if (parseFloat(val) === 0.1) {
+        feedback.innerText = "🌟 Outstanding! 1 piece out of 10 = 1/10 = 0.1";
         feedback.style.color = "var(--success)";
-        nextBtn.innerText = "Continue ➔";
+        nextBtn.innerText = "Restart Activity ↺";
         nextBtn.style.display = "inline-block";
       } else {
-        feedback.innerText = "❌ Try again! Think: 1 part out of 10 equal parts = 0.1";
+        feedback.innerText = "❌ Think: 1 divided by 10 = 0.1";
         feedback.style.color = "var(--danger)";
-        nextBtn.style.display = "none";
       }
     }
 
-    // Initialize board
     renderDigits(currentValue);
   </script>
 </body>
