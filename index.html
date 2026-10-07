@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -11,7 +10,7 @@
 <style>
 
 /* =====================================================
-   BASIC
+   GENERAL
 ===================================================== */
 
 * {
@@ -26,9 +25,9 @@ body {
 }
 
 .container {
-    max-width: 850px;
-    margin: 0 auto;
-    padding: 25px 15px;
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
 }
 
 
@@ -38,15 +37,15 @@ body {
 
 .logo {
     text-align: center;
-    font-size: 32px;
+    font-size: 34px;
     font-weight: bold;
-    margin-bottom: 8px;
+    margin-top: 10px;
 }
 
 .subtitle {
     text-align: center;
     color: #666;
-    margin-bottom: 25px;
+    margin: 8px 0 25px;
 }
 
 
@@ -59,12 +58,12 @@ body {
     border-radius: 25px;
     padding: 35px;
     box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-    min-height: 500px;
+    min-height: 560px;
 }
 
 
 /* =====================================================
-   SLIDE
+   LEARNING SLIDES
 ===================================================== */
 
 .slide {
@@ -89,7 +88,12 @@ h1 {
 
 h2 {
     text-align: center;
-    font-size: 27px;
+    font-size: 28px;
+    margin-bottom: 25px;
+}
+
+h3 {
+    text-align: center;
 }
 
 p {
@@ -103,32 +107,31 @@ p {
 
 
 /* =====================================================
-   LEARNING PROGRESS
+   PROGRESS
 ===================================================== */
 
 .progress-area {
-    margin-bottom: 20px;
+    margin-bottom: 18px;
 }
 
 .progress-label {
     display: flex;
     justify-content: space-between;
-    font-size: 14px;
     color: #666;
+    font-size: 14px;
     margin-bottom: 6px;
 }
 
 .progress-track {
-    width: 100%;
     height: 10px;
-    background: #e3e3e3;
+    background: #e1e1e1;
     border-radius: 20px;
     overflow: hidden;
 }
 
 .progress-fill {
     height: 100%;
-    width: 8%;
+    width: 0%;
     background: #5b6cff;
     border-radius: 20px;
     transition: width 0.4s;
@@ -136,7 +139,7 @@ p {
 
 
 /* =====================================================
-   VISUAL TENTHS
+   BASIC VISUAL
 ===================================================== */
 
 .tenths {
@@ -144,13 +147,11 @@ p {
     justify-content: center;
     gap: 3px;
     margin: 35px auto;
-    max-width: 650px;
 }
 
 .tenth {
-    height: 80px;
-    flex: 1;
-    max-width: 55px;
+    width: 45px;
+    height: 75px;
     border: 2px solid #333;
     background: white;
     cursor: pointer;
@@ -162,17 +163,17 @@ p {
 }
 
 .tenth.selected {
-    background: #6c7cff;
+    background: #6475ff;
 }
 
 
 /* =====================================================
-   HUNDREDTHS
+   HUNDREDTH GRID
 ===================================================== */
 
 .hundred-grid {
-    width: 300px;
-    height: 300px;
+    width: 280px;
+    height: 280px;
     margin: 25px auto;
     display: grid;
     grid-template-columns: repeat(10, 1fr);
@@ -180,85 +181,168 @@ p {
 }
 
 .hundred-cell {
-    border: 1px solid #bbb;
+    border: 1px solid #aaa;
     background: white;
     cursor: pointer;
 }
 
 .hundred-cell.selected {
-    background: #6c7cff;
+    background: #6475ff;
 }
 
 
 /* =====================================================
-   EQUATION
+   EQUATIONS
 ===================================================== */
 
 .equation {
+    text-align: center;
     font-size: 34px;
     font-weight: bold;
-    text-align: center;
     margin: 25px 0;
 }
 
 .big-answer {
-    font-size: 50px;
-    font-weight: bold;
     text-align: center;
-    margin: 25px 0;
+    font-size: 45px;
+    font-weight: bold;
+    margin: 20px;
 }
 
 
 /* =====================================================
-   KEY IDEA
+   INFORMATION BOXES
 ===================================================== */
 
-.key-box {
-    background: #fff4cc;
-    border-radius: 18px;
+.info-box {
+    background: #eef0ff;
     padding: 20px;
+    border-radius: 18px;
+    margin: 20px 0;
+}
+
+.key-box {
+    background: #fff3c9;
+    padding: 20px;
+    border-radius: 18px;
     margin: 25px 0;
     text-align: center;
     font-size: 20px;
     font-weight: bold;
 }
 
-.info-box {
-    background: #eef0ff;
-    border-radius: 18px;
-    padding: 20px;
-    margin: 20px 0;
-}
-
 
 /* =====================================================
-   STEP REVEAL
+   DECIMAL POINT MOVEMENT
 ===================================================== */
 
-.reveal {
-    display: none;
-    margin-top: 20px;
-}
-
-.reveal.show {
-    display: block;
-}
-
-
-/* =====================================================
-   CHECK QUESTIONS
-===================================================== */
-
-.check-question {
+.movement-container {
+    margin: 30px auto;
+    max-width: 700px;
     background: #f6f7ff;
-    padding: 25px;
-    border-radius: 18px;
-    margin-top: 25px;
+    border-radius: 22px;
+    padding: 25px 15px 15px;
 }
 
-.check-question button {
-    background: white;
-    color: #333;
+.number-line {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    height: 85px;
+}
+
+.digit {
+    width: 48px;
+    text-align: center;
+    font-size: 46px;
+    font-weight: bold;
+}
+
+.decimal {
+    width: 20px;
+    color: #5b6cff;
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.arrow-area {
+    height: 130px;
+    position: relative;
+}
+
+.curved-arrow {
+    width: 260px;
+    height: 125px;
+    display: block;
+    margin: auto;
+    overflow: visible;
+}
+
+.curved-arrow path {
+    fill: none;
+    stroke: #5b6cff;
+    stroke-width: 5;
+    stroke-linecap: round;
+    stroke-dasharray: 500;
+    stroke-dashoffset: 500;
+    animation: drawArrow 1.5s ease forwards;
+}
+
+.curved-arrow marker path {
+    fill: #5b6cff;
+    stroke: none;
+}
+
+.arrow-label {
+    text-align: center;
+    font-weight: bold;
+    color: #5b6cff;
+    margin-top: -5px;
+}
+
+@keyframes drawArrow {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+
+/* =====================================================
+   MOVING DECIMAL
+===================================================== */
+
+.moving-decimal {
+    color: #ff6b6b;
+    animation: decimalPulse 1.2s infinite alternate;
+}
+
+@keyframes decimalPulse {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.25);
+    }
+}
+
+
+/* =====================================================
+   STEP CARDS
+===================================================== */
+
+.step-card {
+    background: #f7f7fb;
+    border-radius: 18px;
+    padding: 18px;
+    margin: 15px 0;
+    text-align: center;
+}
+
+.step-number {
+    font-weight: bold;
+    color: #5b6cff;
 }
 
 
@@ -268,8 +352,8 @@ p {
 
 button {
     border: none;
-    border-radius: 14px;
-    padding: 15px 22px;
+    border-radius: 13px;
+    padding: 14px 22px;
     font-size: 17px;
     cursor: pointer;
     margin: 6px;
@@ -287,11 +371,7 @@ button:hover {
 }
 
 .primary:hover {
-    background: #4657ed;
-}
-
-.secondary {
-    background: #eeeeee;
+    background: #4555e8;
 }
 
 .navigation {
@@ -306,15 +386,22 @@ button:hover {
 
 
 /* =====================================================
-   MINI CHECK
+   MINI QUESTIONS
 ===================================================== */
 
+.option-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
 .mini-feedback {
-    text-align: center;
-    font-size: 18px;
-    font-weight: bold;
     min-height: 30px;
-    margin-top: 10px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 12px;
 }
 
 
@@ -324,9 +411,9 @@ button:hover {
 
 .quiz-question {
     font-size: 25px;
-    line-height: 1.5;
-    margin: 30px 0;
     text-align: center;
+    line-height: 1.5;
+    margin: 35px 0;
 }
 
 .answer-grid {
@@ -336,17 +423,13 @@ button:hover {
 }
 
 .answer-grid button {
-    background: #f0f1f7;
     min-height: 60px;
-}
-
-.answer-grid button:hover {
-    background: #dfe3ff;
+    background: #f0f1f7;
 }
 
 .quiz-feedback {
-    text-align: center;
     min-height: 35px;
+    text-align: center;
     font-size: 19px;
     font-weight: bold;
     margin: 20px 0;
@@ -359,9 +442,9 @@ button:hover {
 
 .result-score {
     text-align: center;
-    font-size: 55px;
+    font-size: 58px;
     font-weight: bold;
-    margin: 40px 0 20px;
+    margin: 35px;
 }
 
 .result-message {
@@ -384,10 +467,10 @@ button:hover {
    MOBILE
 ===================================================== */
 
-@media (max-width: 600px) {
+@media(max-width:600px) {
 
     .card {
-        padding: 22px;
+        padding: 20px;
     }
 
     h1 {
@@ -402,39 +485,42 @@ button:hover {
         font-size: 16px;
     }
 
-    .tenths {
-        gap: 2px;
-    }
-
     .tenth {
+        width: 27px;
         height: 55px;
     }
 
     .hundred-grid {
-        width: 250px;
-        height: 250px;
+        width: 240px;
+        height: 240px;
+    }
+
+    .digit {
+        width: 35px;
+        font-size: 35px;
+    }
+
+    .decimal {
+        font-size: 38px;
+    }
+
+    .curved-arrow {
+        width: 220px;
     }
 
     .answer-grid {
         grid-template-columns: 1fr;
     }
 
-    .equation {
-        font-size: 27px;
-    }
-
 }
 
 </style>
-
 </head>
 
 
 <body>
 
-
 <div class="container">
-
 
 <div class="logo">🧠 MathIQ</div>
 
@@ -444,32 +530,22 @@ Learn • Explore • Practise • Master
 
 
 <!-- =====================================================
-     LEARNING SECTION
+     LEARNING
 ===================================================== -->
 
 <div id="learningSection">
 
-
 <div class="progress-area">
 
 <div class="progress-label">
-
-<span id="learningLabel">
-Learning
-</span>
-
-<span id="learningCount">
-1 / 12
-</span>
-
+<span>Learning Journey</span>
+<span id="learningCount">1 / 12</span>
 </div>
 
 <div class="progress-track">
 
-<div
-id="learningProgress"
-class="progress-fill">
-</div>
+<div id="learningProgress"
+class="progress-fill"></div>
 
 </div>
 
@@ -489,37 +565,27 @@ class="progress-fill">
 Step 1 of 12
 </div>
 
-<h1>👋 Let's Explore Decimals!</h1>
+<h1>👋 Welcome to Decimal Land!</h1>
 
 <p class="center">
-
-Imagine you have <b>one whole chocolate bar</b>.
-
+Today we're going to discover something interesting.
 </p>
 
 <p class="center">
-
-What happens if we share it equally between
-<b>10 people?</b>
-
+What happens when we split <b>one whole</b>
+into smaller equal parts?
 </p>
 
 <div class="equation">
-
-1 whole → 10 equal parts
-
+1 whole
 </div>
 
 <div class="key-box">
-
-🍫 One whole can be split into 10 equal parts.
-
+🍫 Imagine one whole chocolate bar.
 </div>
 
 <p class="center">
-
-Let's discover what each part is called!
-
+Let's split it into <b>10 equal pieces</b>.
 </p>
 
 </div>
@@ -538,12 +604,10 @@ Step 2 of 12
 <h2>🧩 Meet One Tenth</h2>
 
 <p class="center">
-
-Here is one whole divided into 10 equal parts.
-
+Click one piece.
 </p>
 
-<div class="tenths" id="tenthsVisual">
+<div class="tenths">
 
 <div class="tenth"></div>
 <div class="tenth"></div>
@@ -558,14 +622,9 @@ Here is one whole divided into 10 equal parts.
 
 </div>
 
-<p class="center">
-👆 Click <b>one part</b>.
-</p>
-
-<div
-id="tenthMessage"
+<div id="tenthMessage"
 class="key-box">
-
+👆 Choose one piece.
 </div>
 
 </div>
@@ -581,34 +640,28 @@ class="key-box">
 Step 3 of 12
 </div>
 
-<h2>🔢 One Tenth Has Two Forms</h2>
+<h2>🔢 One Tenth = 0.1</h2>
 
 <p class="center">
-
 One part out of ten is:
-
 </p>
 
 <div class="equation">
-
 1/10 = 0.1
-
 </div>
 
-<div class="info-box">
+<div class="info-box center">
 
-<b>Fraction:</b> 1/10
+<b>1/10</b> is the fraction.
 
 <br><br>
 
-<b>Decimal:</b> 0.1
+<b>0.1</b> is the decimal.
 
 </div>
 
 <div class="key-box">
-
-💡 <b>1/10 and 0.1 are the same amount.</b>
-
+💡 They represent exactly the same amount.
 </div>
 
 </div>
@@ -624,37 +677,26 @@ One part out of ten is:
 Step 4 of 12
 </div>
 
-<h2>🌈 Let's Look at More Tenths</h2>
+<h2>🌈 See Tenths Grow</h2>
 
-<p class="center">
+<div class="step-card">
+1/10 = <b>0.1</b>
+</div>
 
-Watch how the fraction changes as we shade more parts.
+<div class="step-card">
+2/10 = <b>0.2</b>
+</div>
 
-</p>
+<div class="step-card">
+5/10 = <b>0.5</b>
+</div>
 
-<div class="info-box">
-
-1/10 = 0.1
-
-<br>
-
-2/10 = 0.2
-
-<br>
-
-5/10 = 0.5
-
-<br>
-
-10/10 = 1
-
+<div class="step-card">
+10/10 = <b>1</b>
 </div>
 
 <div class="key-box">
-
-The number of shaded parts becomes
-the digit after the decimal point.
-
+The digit after the decimal tells us how many tenths we have.
 </div>
 
 </div>
@@ -670,29 +712,23 @@ the digit after the decimal point.
 Step 5 of 12
 </div>
 
-<h2>🔲 Now Meet Hundredths</h2>
+<h2>🔲 Now Think Smaller</h2>
 
 <p class="center">
-
 What if we divide a whole into
-<b>100 tiny equal parts?</b>
-
+<b>100 equal parts?</b>
 </p>
 
-<div class="hundred-grid" id="hundredGrid">
-
+<div class="hundred-grid"
+id="hundredGrid">
 </div>
 
 <p class="center">
-
-👆 Click one tiny square.
-
+👆 Choose one tiny square.
 </p>
 
-<div
-id="hundredMessage"
+<div id="hundredMessage"
 class="key-box">
-
 </div>
 
 </div>
@@ -708,43 +744,30 @@ class="key-box">
 Step 6 of 12
 </div>
 
-<h2>🔎 One Hundredth</h2>
-
-<p class="center">
-
-One tiny part out of 100 is called
-<b>one hundredth</b>.
-
-</p>
+<h2>🔎 Meet One Hundredth</h2>
 
 <div class="equation">
-
 1/100 = 0.01
-
 </div>
 
-<div class="info-box">
+<div class="info-box center">
 
-<b>One tenth</b>
+One tenth:
 
 <br>
-
-1/10 = 0.1
+<b>0.1</b>
 
 <br><br>
 
-<b>One hundredth</b>
+One hundredth:
 
 <br>
-
-1/100 = 0.01
+<b>0.01</b>
 
 </div>
 
 <div class="key-box">
-
 💡 0.01 is smaller than 0.1.
-
 </div>
 
 </div>
@@ -760,43 +783,40 @@ One tiny part out of 100 is called
 Step 7 of 12
 </div>
 
-<h2>🔗 Put Them Together</h2>
+<h2>✖️ Let's Multiply by 0.1</h2>
 
 <p class="center">
-
-Now we know:
-
+Start with:
 </p>
 
 <div class="equation">
+25 × 0.1
+</div>
 
-1/10 = 0.1
+<div class="info-box center">
+
+Multiplying by 0.1 is the same as
+<b>dividing by 10</b>.
 
 <br><br>
 
-1/100 = 0.01
+25 ÷ 10 = <b>2.5</b>
 
 </div>
 
 <div class="key-box">
-
-Remember:
+So...
 
 <br><br>
 
-0.1 = one tenth
-
-<br>
-
-0.01 = one hundredth
-
+25 × 0.1 = <b>2.5</b>
 </div>
 
 </div>
 
 
 <!-- =================================================
-     SLIDE 8
+     SLIDE 8 — ONE PLACE MOVEMENT
 ================================================= -->
 
 <div class="slide">
@@ -805,70 +825,84 @@ Remember:
 Step 8 of 12
 </div>
 
-<h2>✖️ What Does × 0.1 Do?</h2>
+<h2>👀 Watch the Decimal Point Move</h2>
 
 <p class="center">
-
-Let's start with:
-
+When we multiply by <b>0.1</b>,
+the decimal point moves
+<b>one place to the left</b>.
 </p>
 
-<div class="equation">
 
-10 × 0.1
+<div class="movement-container">
 
-</div>
+<div class="number-line">
 
-<button
-class="primary"
-onclick="showReveal('reveal01')">
-
-🔍 Show me what happens
-
-</button>
-
-<div
-id="reveal01"
-class="reveal">
-
-<div class="info-box">
-
-10 × 0.1
-
-<br><br>
-
-is the same as
-
-<br><br>
-
-10 ÷ 10
-
-<br><br>
-
-= <b>1</b>
+<span class="digit">2</span>
+<span class="digit">5</span>
+<span class="decimal">.</span>
+<span class="digit">0</span>
 
 </div>
 
-<div class="big-answer">
 
-10 × 0.1 = 1
+<div class="arrow-area">
+
+<svg
+class="curved-arrow"
+viewBox="0 0 260 125">
+
+<defs>
+
+<marker
+id="arrowHead1"
+markerWidth="10"
+markerHeight="10"
+refX="8"
+refY="3"
+orient="auto">
+
+<path d="M0,0 L0,6 L9,3 z"/>
+
+</marker>
+
+</defs>
+
+<path
+d="M205 20
+C205 105, 120 115, 72 45"
+marker-end="url(#arrowHead1)">
+</path>
+
+</svg>
+
+<div class="arrow-label">
+← ONE PLACE LEFT
+</div>
 
 </div>
+
+
+<div class="number-line">
+
+<span class="digit">2</span>
+<span class="moving-decimal">.</span>
+<span class="digit">5</span>
+
+</div>
+
+</div>
+
 
 <div class="key-box">
-
-💡 Multiplying by 0.1 means
-<b>dividing by 10.</b>
-
-</div>
-
+✖️ 0.1 → move the decimal point <b>1 place LEFT</b>
 </div>
 
 </div>
 
 
 <!-- =================================================
-     SLIDE 9
+     SLIDE 9 — TRY 0.1
 ================================================= -->
 
 <div class="slide">
@@ -877,50 +911,41 @@ is the same as
 Step 9 of 12
 </div>
 
-<h2>🎯 Let's Try × 0.1</h2>
+<h2>🎯 Your Turn!</h2>
 
-<div class="check-question">
+<p class="center">
+Move the decimal point <b>one place left</b>.
+</p>
 
-<h3 class="center">
+<div class="equation">
+48.0 × 0.1
+</div>
 
-What is 20 × 0.1?
+<div class="option-row">
 
-</h3>
-
-<div class="center">
-
-<button onclick="miniCheck(this, '2', 'mini1')">
-2
+<button onclick="miniCheck(this,'4.8','check1')">
+4.8
 </button>
 
-<button onclick="miniCheck(this, '20', 'mini1')">
-20
+<button onclick="miniCheck(this,'48','check1')">
+48
 </button>
 
-<button onclick="miniCheck(this, '0.2', 'mini1')">
-0.2
+<button onclick="miniCheck(this,'0.48','check1')">
+0.48
 </button>
 
 </div>
 
-<div
-id="mini1"
+<div id="check1"
 class="mini-feedback">
-</div>
-
-</div>
-
-<div class="key-box">
-
-💡 Think: 20 ÷ 10 = ?
-
 </div>
 
 </div>
 
 
 <!-- =================================================
-     SLIDE 10
+     SLIDE 10 — 0.01
 ================================================= -->
 
 <div class="slide">
@@ -929,70 +954,40 @@ class="mini-feedback">
 Step 10 of 12
 </div>
 
-<h2>✖️ What Does × 0.01 Do?</h2>
+<h2>✖️ Now Multiply by 0.01</h2>
 
 <p class="center">
-
-Now let's look at:
-
+Let's start with:
 </p>
 
 <div class="equation">
-
-10 × 0.01
-
+25 × 0.01
 </div>
 
-<button
-class="primary"
-onclick="showReveal('reveal001')">
+<div class="info-box center">
 
-🔍 Show me what happens
-
-</button>
-
-<div
-id="reveal001"
-class="reveal">
-
-<div class="info-box">
-
-10 × 0.01
+Multiplying by 0.01 means
+<b>dividing by 100</b>.
 
 <br><br>
 
-is the same as
-
-<br><br>
-
-10 ÷ 100
-
-<br><br>
-
-= <b>0.1</b>
-
-</div>
-
-<div class="big-answer">
-
-10 × 0.01 = 0.1
+25 ÷ 100 = <b>0.25</b>
 
 </div>
 
 <div class="key-box">
+Therefore:
 
-💡 Multiplying by 0.01 means
-<b>dividing by 100.</b>
+<br><br>
 
-</div>
-
+25 × 0.01 = <b>0.25</b>
 </div>
 
 </div>
 
 
 <!-- =================================================
-     SLIDE 11
+     SLIDE 11 — TWO PLACE MOVEMENT
 ================================================= -->
 
 <div class="slide">
@@ -1001,51 +996,84 @@ is the same as
 Step 11 of 12
 </div>
 
-<h2>🧠 Compare Them</h2>
+<h2>👀 Watch It Move Two Places</h2>
 
-<div class="info-box center">
+<p class="center">
+× 0.01 means the decimal point moves
+<b>two places left</b>.
+</p>
 
-<b>× 0.1</b>
 
-<br>
+<div class="movement-container">
 
-means ÷ 10
+<div class="number-line">
 
-<br><br>
-
-<b>× 0.01</b>
-
-<br>
-
-means ÷ 100
-
-</div>
-
-<div class="check-question">
-
-<h3 class="center">
-
-Which makes a number smaller?
-
-</h3>
-
-<div class="center">
-
-<button onclick="miniCheck(this, '0.01', 'mini2')">
-× 0.01
-</button>
-
-<button onclick="miniCheck(this, '0.1', 'mini2')">
-× 0.1
-</button>
+<span class="digit">2</span>
+<span class="digit">5</span>
+<span class="decimal">.</span>
+<span class="digit">0</span>
+<span class="digit">0</span>
 
 </div>
 
-<div
-id="mini2"
-class="mini-feedback">
+
+<div class="arrow-area">
+
+<svg
+class="curved-arrow"
+viewBox="0 0 260 125">
+
+<defs>
+
+<marker
+id="arrowHead2"
+markerWidth="10"
+markerHeight="10"
+refX="8"
+refY="3"
+orient="auto">
+
+<path d="M0,0 L0,6 L9,3 z"/>
+
+</marker>
+
+</defs>
+
+<path
+d="M215 20
+C215 110, 130 118, 95 48"
+marker-end="url(#arrowHead2)">
+</path>
+
+<path
+d="M170 20
+C170 85, 110 100, 58 48"
+marker-end="url(#arrowHead2)">
+</path>
+
+</svg>
+
+<div class="arrow-label">
+← TWO PLACES LEFT
 </div>
 
+</div>
+
+
+<div class="number-line">
+
+<span class="digit">0</span>
+<span class="moving-decimal">.</span>
+<span class="digit">2</span>
+<span class="digit">5</span>
+
+</div>
+
+</div>
+
+
+<div class="key-box">
+✖️ 0.01 → move the decimal point <b>2 places LEFT</b>
 </div>
 
 </div>
@@ -1061,44 +1089,30 @@ class="mini-feedback">
 Step 12 of 12
 </div>
 
-<h2>🚀 You're Ready!</h2>
-
-<p class="center">
-
-You've learned:
-
-</p>
+<h2>🚀 You've Got It!</h2>
 
 <div class="info-box">
 
-✅ Tenths
+<p>
+<strong>0.1</strong> → one place left
+</p>
 
-<br><br>
+<p>
+<strong>0.01</strong> → two places left
+</p>
 
-✅ Hundredths
+<p>
+<strong>× 0.1</strong> → ÷ 10
+</p>
 
-<br><br>
-
-✅ 1/10 = 0.1
-
-<br><br>
-
-✅ 1/100 = 0.01
-
-<br><br>
-
-✅ × 0.1 = ÷ 10
-
-<br><br>
-
-✅ × 0.01 = ÷ 100
+<p>
+<strong>× 0.01</strong> → ÷ 100
+</p>
 
 </div>
 
 <div class="key-box">
-
-🎯 Now let's see what you can do!
-
+🎯 Ready for the MathIQ Challenge?
 </div>
 
 </div>
@@ -1112,13 +1126,11 @@ You've learned:
 
 <button
 id="backButton"
-class="secondary"
 onclick="previousSlide()">
 
 ← Back
 
 </button>
-
 
 <button
 id="nextButton"
@@ -1131,7 +1143,6 @@ Next →
 
 </div>
 
-
 </div>
 
 </div>
@@ -1141,18 +1152,14 @@ Next →
      QUIZ SECTION
 ===================================================== -->
 
-<div
-id="quizSection"
+<div id="quizSection"
 class="hidden">
-
 
 <div class="progress-area">
 
 <div class="progress-label">
 
-<span>
-🎯 Challenge
-</span>
+<span>🎯 MathIQ Challenge</span>
 
 <span id="quizCount">
 1 / 50
@@ -1162,8 +1169,7 @@ class="hidden">
 
 <div class="progress-track">
 
-<div
-id="quizProgress"
+<div id="quizProgress"
 class="progress-fill">
 </div>
 
@@ -1211,13 +1217,12 @@ Next Question →
      RESULT
 ===================================================== -->
 
-<div
-id="resultSection"
+<div id="resultSection"
 class="hidden">
 
 <div class="card">
 
-<h1>🎉 Amazing Work!</h1>
+<h1>🎉 Lesson Complete!</h1>
 
 <div
 id="resultScore"
@@ -1229,17 +1234,10 @@ id="resultMessage"
 class="result-message">
 </div>
 
-<div class="key-box">
-
-You completed the MathIQ
-Decimals & Multiplication lesson!
-
-</div>
-
 <button
 class="primary"
 onclick="location.reload()"
-style="display:block;margin:25px auto;">
+style="display:block;margin:30px auto;">
 
 🔄 Try Again
 
@@ -1249,12 +1247,10 @@ style="display:block;margin:25px auto;">
 
 </div>
 
-
 </div>
 
 
 <script>
-
 
 /* =====================================================
    LEARNING SLIDES
@@ -1270,13 +1266,13 @@ document.querySelectorAll(".slide");
 
 function updateLearningProgress() {
 
-    const percentage =
+    const percent =
     ((currentSlide + 1) / totalSlides) * 100;
 
     document
     .getElementById("learningProgress")
     .style.width =
-    percentage + "%";
+    percent + "%";
 
 
     document
@@ -1287,41 +1283,38 @@ function updateLearningProgress() {
     totalSlides;
 
 
+    slides.forEach(
+        (slide,index) => {
+
+            slide.classList.toggle(
+                "active",
+                index === currentSlide
+            );
+
+        }
+    );
+
+
     document
-    .querySelectorAll(".slide")
-    .forEach((slide, index) => {
-
-        slide.classList.toggle(
-            "active",
-            index === currentSlide
-        );
-
-    });
-
-
-    const back =
-    document.getElementById("backButton");
-
-    const next =
-    document.getElementById("nextButton");
-
-
-    back.style.visibility =
+    .getElementById("backButton")
+    .style.visibility =
     currentSlide === 0
     ? "hidden"
     : "visible";
 
 
-    if (currentSlide === totalSlides - 1) {
+    if(currentSlide === totalSlides - 1){
 
-        next.innerText =
+        document
+        .getElementById("nextButton")
+        .innerText =
         "Start Challenge 🚀";
 
-    }
+    } else {
 
-    else {
-
-        next.innerText =
+        document
+        .getElementById("nextButton")
+        .innerText =
         "Next →";
 
     }
@@ -1329,17 +1322,15 @@ function updateLearningProgress() {
 }
 
 
-function nextSlide() {
+function nextSlide(){
 
-    if (currentSlide < totalSlides - 1) {
+    if(currentSlide < totalSlides - 1){
 
         currentSlide++;
 
         updateLearningProgress();
 
-    }
-
-    else {
+    }else{
 
         startQuiz();
 
@@ -1348,9 +1339,9 @@ function nextSlide() {
 }
 
 
-function previousSlide() {
+function previousSlide(){
 
-    if (currentSlide > 0) {
+    if(currentSlide > 0){
 
         currentSlide--;
 
@@ -1369,38 +1360,40 @@ const tenthParts =
 document.querySelectorAll(".tenth");
 
 
-tenthParts.forEach((part, index) => {
+tenthParts.forEach(part => {
 
-    part.addEventListener("click", function() {
+    part.addEventListener(
+        "click",
+        function(){
 
-        tenthParts.forEach(p =>
-            p.classList.remove("selected")
-        );
+            tenthParts.forEach(
+                p => p.classList.remove("selected")
+            );
 
+            this.classList.add("selected");
 
-        part.classList.add("selected");
+            document
+            .getElementById("tenthMessage")
+            .innerHTML =
+            "🌟 Great! You chose <b>1 out of 10</b> parts." +
+            "<br><br>" +
+            "<b>1/10 = 0.1</b>";
 
-
-        document
-        .getElementById("tenthMessage")
-        .innerHTML =
-        "🌟 You selected <b>1 out of 10 parts</b>.<br><br>" +
-        "That is <b>1/10 = 0.1</b>!";
-
-    });
+        }
+    );
 
 });
 
 
 /* =====================================================
-   HUNDREDTHS INTERACTION
+   HUNDREDTH GRID
 ===================================================== */
 
 const hundredGrid =
 document.getElementById("hundredGrid");
 
 
-for (let i = 0; i < 100; i++) {
+for(let i = 0; i < 100; i++){
 
     const cell =
     document.createElement("div");
@@ -1409,25 +1402,27 @@ for (let i = 0; i < 100; i++) {
     "hundred-cell";
 
 
-    cell.addEventListener("click", function() {
+    cell.addEventListener(
+        "click",
+        function(){
 
-        document
-        .querySelectorAll(".hundred-cell")
-        .forEach(c =>
-            c.classList.remove("selected")
-        );
+            document
+            .querySelectorAll(".hundred-cell")
+            .forEach(
+                c => c.classList.remove("selected")
+            );
 
+            this.classList.add("selected");
 
-        cell.classList.add("selected");
+            document
+            .getElementById("hundredMessage")
+            .innerHTML =
+            "🔎 One tiny square out of 100!" +
+            "<br><br>" +
+            "<b>1/100 = 0.01</b>";
 
-
-        document
-        .getElementById("hundredMessage")
-        .innerHTML =
-        "🔎 You selected <b>1 tiny part out of 100</b>.<br><br>" +
-        "That is <b>1/100 = 0.01</b>!";
-
-    });
+        }
+    );
 
 
     hundredGrid.appendChild(cell);
@@ -1436,45 +1431,44 @@ for (let i = 0; i < 100; i++) {
 
 
 /* =====================================================
-   REVEAL
-===================================================== */
-
-function showReveal(id) {
-
-    document
-    .getElementById(id)
-    .classList.add("show");
-
-}
-
-
-/* =====================================================
    MINI CHECK
 ===================================================== */
 
-function miniCheck(button, answer, feedbackId) {
+function miniCheck(
+    button,
+    answer,
+    feedbackId
+){
+
+    let correct = "";
+
+    if(feedbackId === "check1"){
+        correct = "4.8";
+    }
+
 
     const feedback =
     document.getElementById(feedbackId);
 
 
-    if (
-        (feedbackId === "mini1" && answer === "2") ||
-        (feedbackId === "mini2" && answer === "0.01")
-    ) {
+    if(answer === correct){
+
+        button.style.background =
+        "#c8f7c5";
 
         feedback.innerHTML =
-        "🎉 Correct! Great thinking!";
+        "🎉 Correct! One place to the left!";
 
         feedback.style.color =
         "#218838";
 
-    }
+    }else{
 
-    else {
+        button.style.background =
+        "#ffd0d0";
 
         feedback.innerHTML =
-        "💡 Not quite. Think about dividing by 10 or 100.";
+        "💡 Not quite. Move the decimal point ONE place left.";
 
         feedback.style.color =
         "#d35400";
@@ -1485,12 +1479,12 @@ function miniCheck(button, answer, feedbackId) {
 
 
 /* =====================================================
-   QUESTION BANK
+   QUIZ QUESTIONS
 ===================================================== */
 
 const questions = [
 
-/* ---------- CONCEPT ---------- */
+/* CONCEPT */
 
 {
 stage:"🌱 Build the Concept",
@@ -1522,12 +1516,12 @@ correct:"0.8"
 
 {
 stage:"🌱 Build the Concept",
-question:"Which fraction is equal to 0.3?",
+question:"Which fraction equals 0.3?",
 answers:["3/10","3/100","30/10"],
 correct:"3/10"
 },
 
-/* ---------- HUNDREDTHS ---------- */
+/* HUNDREDTHS */
 
 {
 stage:"🔎 Hundredths",
@@ -1552,7 +1546,7 @@ correct:"0.25"
 
 {
 stage:"🔎 Hundredths",
-question:"Which fraction is equal to 0.07?",
+question:"Which fraction equals 0.07?",
 answers:["7/10","7/100","70/100"],
 correct:"7/100"
 },
@@ -1564,7 +1558,7 @@ answers:["0.1","0.01","They are equal"],
 correct:"0.01"
 },
 
-/* ---------- × 0.1 ---------- */
+/* ×0.1 */
 
 {
 stage:"✖️ Multiply by 0.1",
@@ -1622,7 +1616,7 @@ answers:["0.35","3.5","0.035"],
 correct:"0.35"
 },
 
-/* ---------- × 0.01 ---------- */
+/* ×0.01 */
 
 {
 stage:"✖️ Multiply by 0.01",
@@ -1680,7 +1674,7 @@ answers:["0.35","0.035","0.0035"],
 correct:"0.035"
 },
 
-/* ---------- MIXED ---------- */
+/* MIXED */
 
 {
 stage:"🧠 Mixed Practice",
@@ -1752,7 +1746,7 @@ answers:["× 0.1","× 0.01","× 10"],
 correct:"× 0.1"
 },
 
-/* ---------- WORD PROBLEMS ---------- */
+/* WORD PROBLEMS */
 
 {
 stage:"🌍 Word Problem",
@@ -1842,17 +1836,15 @@ let questionAnswered = false;
    START QUIZ
 ===================================================== */
 
-function startQuiz() {
+function startQuiz(){
 
     document
     .getElementById("learningSection")
     .classList.add("hidden");
 
-
     document
     .getElementById("quizSection")
     .classList.remove("hidden");
-
 
     showQuestion();
 
@@ -1863,10 +1855,9 @@ function startQuiz() {
    SHOW QUESTION
 ===================================================== */
 
-function showQuestion() {
+function showQuestion(){
 
     questionAnswered = false;
-
 
     const q =
     questions[currentQuestion];
@@ -1894,8 +1885,7 @@ function showQuestion() {
 
     document
     .getElementById("quizFeedback")
-    .innerText =
-    "";
+    .innerText = "";
 
 
     document
@@ -1903,7 +1893,7 @@ function showQuestion() {
     .classList.add("hidden");
 
 
-    const percentage =
+    const percent =
     ((currentQuestion + 1) /
     questions.length) * 100;
 
@@ -1911,16 +1901,16 @@ function showQuestion() {
     document
     .getElementById("quizProgress")
     .style.width =
-    percentage + "%";
+    percent + "%";
 
 
-    const answerArea =
+    const area =
     document.getElementById(
         "answerButtons"
     );
 
 
-    answerArea.innerHTML = "";
+    area.innerHTML = "";
 
 
     q.answers.forEach(answer => {
@@ -1934,7 +1924,7 @@ function showQuestion() {
 
 
         button.onclick =
-        function() {
+        function(){
 
             checkAnswer(
                 answer,
@@ -1944,9 +1934,7 @@ function showQuestion() {
         };
 
 
-        answerArea.appendChild(
-            button
-        );
+        area.appendChild(button);
 
     });
 
@@ -1960,9 +1948,9 @@ function showQuestion() {
 function checkAnswer(
     answer,
     button
-) {
+){
 
-    if (questionAnswered)
+    if(questionAnswered)
         return;
 
 
@@ -1973,27 +1961,22 @@ function checkAnswer(
     questions[currentQuestion];
 
 
-    if (answer === q.correct) {
+    if(answer === q.correct){
 
         score++;
-
 
         button.style.background =
         "#c8f7c5";
 
-
         document
         .getElementById("quizFeedback")
         .innerText =
-        "🎉 Correct! Excellent thinking!";
+        "🎉 Correct! Great thinking!";
 
-    }
-
-    else {
+    }else{
 
         button.style.background =
         "#ffd0d0";
-
 
         document
         .getElementById("quizFeedback")
@@ -2015,21 +1998,16 @@ function checkAnswer(
    NEXT QUESTION
 ===================================================== */
 
-function nextQuestion() {
+function nextQuestion(){
 
     currentQuestion++;
 
 
-    if (
-        currentQuestion <
-        questions.length
-    ) {
+    if(currentQuestion < questions.length){
 
         showQuestion();
 
-    }
-
-    else {
+    }else{
 
         showResult();
 
@@ -2042,7 +2020,7 @@ function nextQuestion() {
    RESULT
 ===================================================== */
 
-function showResult() {
+function showResult(){
 
     document
     .getElementById("quizSection")
@@ -2069,31 +2047,25 @@ function showResult() {
     let message;
 
 
-    if (percentage >= 90) {
+    if(percentage >= 90){
 
         message =
-        "🌟 Outstanding! You have mastered tenths, hundredths, ×0.1 and ×0.01.";
+        "🌟 Outstanding! You have a very strong understanding of tenths, hundredths, and multiplying by 0.1 and 0.01.";
 
-    }
-
-    else if (percentage >= 75) {
+    }else if(percentage >= 75){
 
         message =
-        "👏 Great work! You have a strong understanding. A little more practice will make you even stronger.";
+        "👏 Great work! You understand the main ideas. A little more practice will make you even stronger.";
 
-    }
-
-    else if (percentage >= 50) {
+    }else if(percentage >= 50){
 
         message =
-        "👍 Good start! Review the learning slides and practise the concepts once more.";
+        "👍 Good start! Review the decimal movement slides and try the challenge again.";
 
-    }
-
-    else {
+    }else{
 
         message =
-        "💪 Keep practising! Go back through the learning slides and try again.";
+        "💪 Keep going! Go back through the learning slides and practise the decimal movement again.";
 
     }
 
@@ -2107,7 +2079,7 @@ function showResult() {
 
 
 /* =====================================================
-   START
+   INITIALISE
 ===================================================== */
 
 updateLearningProgress();
