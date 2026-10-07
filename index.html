@@ -3,519 +3,247 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mathiq — Visual Interactive Mathematics</title>
+  <title>The Decimal Bakery: Shift & Scale</title>
   <style>
     :root {
-      --bg-main: #f8fafc;
+      --bg: #fafaf9;
       --card-bg: #ffffff;
-      --text-dark: #0f172a;
-      --text-muted: #64748b;
-      --primary: #4f46e5;
-      --primary-hover: #4338ca;
-      --secondary: #0ea5e9;
-      --accent: #f59e0b;
-      --success: #10b981;
-      --danger: #ef4444;
-      --border: #e2e8f0;
-      --radius-lg: 16px;
-      --radius-md: 10px;
-      --shadow-sm: 0 2px 4px rgba(0,0,0,0.04);
-      --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
-      --font: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      --primary: #d97706;
+      --primary-hover: #b45309;
+      --accent: #0284c7;
+      --success: #16a34a;
+      --text: #1c1917;
+      --text-muted: #78716c;
+      --border: #e7e5e4;
+      --slot-bg: #f5f5f4;
+      --radius: 16px;
+      --shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--font); }
-    body { background-color: var(--bg-main); color: var(--text-dark); min-height: 100vh; padding-bottom: 3rem; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+    body { background-color: var(--bg); color: var(--text); min-height: 100vh; padding: 2rem 1rem; }
+
+    .app-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
 
     header {
-      background: #ffffff;
-      border-bottom: 1px solid var(--border);
-      padding: 1rem 2rem;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .header-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: var(--primary);
-      text-decoration: none;
-    }
-
-    .stats-bar {
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-    }
-
-    .stat-badge {
-      background: var(--bg-main);
-      border: 1px solid var(--border);
-      padding: 0.4rem 0.8rem;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 2rem auto 0 auto;
-      padding: 0 1.5rem;
-    }
-
-    /* Nav Modules */
-    .module-nav {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1rem;
+      text-align: center;
       margin-bottom: 2rem;
     }
 
-    .nav-card {
-      background: var(--card-bg);
-      border: 2px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 1rem;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
+    header h1 { font-size: 2rem; color: var(--primary); margin-bottom: 0.25rem; }
+    header p { color: var(--text-muted); font-size: 1.05rem; }
 
-    .nav-card:hover, .nav-card.active {
-      border-color: var(--primary);
-      background: #f5f3ff;
-      transform: translateY(-2px);
-    }
-
-    .nav-icon {
-      font-size: 1.8rem;
-      background: #e0e7ff;
-      width: 48px;
-      height: 48px;
+    /* Visual Proof Bar */
+    .proof-box {
+      background: #fef3c7;
+      border: 2px solid #fde68a;
       border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* Workspace Layout */
-    .workspace {
-      display: grid;
-      grid-template-columns: 1fr 340px;
-      gap: 1.5rem;
-    }
-
-    @media (max-width: 900px) {
-      .workspace { grid-template-columns: 1fr; }
-    }
-
-    .main-stage {
-      background: var(--card-bg);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem;
-      box-shadow: var(--shadow-md);
-      border: 1px solid var(--border);
-    }
-
-    .sidebar {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .side-card {
-      background: var(--card-bg);
-      border-radius: var(--radius-lg);
       padding: 1.25rem;
-      box-shadow: var(--shadow-sm);
-      border: 1px solid var(--border);
-    }
-
-    /* Animated Bakery Scene */
-    .bakery-oven-container {
-      background: linear-gradient(180deg, #1e1b18 0%, #3a2e2b 100%);
-      border-radius: var(--radius-md);
-      padding: 1.5rem;
-      color: white;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin-bottom: 2rem;
       text-align: center;
-      position: relative;
-      overflow: hidden;
-      margin-bottom: 1.5rem;
     }
 
-    .oven-svg {
-      width: 100%;
-      max-height: 180px;
+    .frac-unit {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      vertical-align: middle;
+      font-weight: 800;
+      font-size: 1.4rem;
+      color: var(--primary);
+    }
+
+    .frac-unit .num { border-bottom: 2px solid var(--primary); padding: 0 4px; }
+    .frac-unit .den { padding: 0 4px; }
+
+    .eq-sign { font-size: 1.8rem; font-weight: 900; color: var(--primary); }
+
+    /* Progress Stepper */
+    .stepper {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .step-dot {
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      background: var(--slot-bg);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+
+    .step-dot.active {
+      background: var(--primary);
+      color: white;
     }
 
     /* Place Value Table */
-    .place-table {
+    .board-wrapper { margin: 2rem 0; overflow-x: auto; }
+
+    .place-board {
       display: grid;
       grid-template-columns: repeat(3, 1fr) 30px repeat(2, 1fr);
       gap: 0.5rem;
-      margin: 1.5rem 0;
       align-items: center;
+      min-width: 600px;
     }
 
-    .col-header {
+    .header-col {
       text-align: center;
-      font-size: 0.8rem;
-      font-weight: 700;
+      font-size: 0.85rem;
+      font-weight: 800;
       color: var(--text-muted);
       text-transform: uppercase;
     }
 
+    .header-col span { font-size: 0.75rem; font-weight: 400; display: block; }
+
     .slot {
-      height: 70px;
-      background: #f1f5f9;
-      border: 2px dashed #cbd5e1;
-      border-radius: 8px;
+      height: 80px;
+      background: var(--slot-bg);
+      border: 2px dashed #d6d3d1;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
     .digit-card {
-      width: 48px;
-      height: 58px;
-      background: var(--primary);
+      width: 52px;
+      height: 64px;
+      background: var(--accent);
       color: white;
-      font-size: 1.8rem;
+      font-size: 2rem;
       font-weight: 800;
-      border-radius: 6px;
+      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
       animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
     @keyframes popIn {
-      0% { transform: scale(0.5); opacity: 0; }
+      0% { transform: scale(0.6); opacity: 0; }
       100% { transform: scale(1); opacity: 1; }
     }
 
-    .decimal-mark {
-      font-size: 2.5rem;
+    .decimal-point {
+      font-size: 3rem;
       font-weight: 900;
       color: var(--primary);
       text-align: center;
     }
 
-    /* Action Controls */
-    .controls-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 0.75rem;
-      margin-top: 1rem;
+    /* Guided Task Panel */
+    .task-card {
+      background: #f0f9ff;
+      border: 2px solid #bae6fd;
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      text-align: center;
+      margin-top: 1.5rem;
     }
+
+    .task-title { font-size: 1.2rem; font-weight: 800; color: #0369a1; margin-bottom: 0.5rem; }
 
     .btn {
-      padding: 0.75rem 1rem;
-      font-size: 0.95rem;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
       font-weight: 700;
       border: none;
-      border-radius: var(--radius-md);
+      border-radius: 10px;
       cursor: pointer;
-      transition: all 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-    }
-
-    .btn-primary { background: var(--primary); color: white; }
-    .btn-primary:hover { background: var(--primary-hover); }
-    .btn-outline { background: transparent; border: 2px solid var(--border); color: var(--text-dark); }
-    .btn-outline:hover { background: #f1f5f9; }
-
-    /* Interactive Explanation */
-    .explanation-banner {
-      background: #eff6ff;
-      border-left: 4px solid var(--secondary);
-      padding: 1rem;
-      border-radius: 0 var(--radius-md) var(--radius-md) 0;
-      margin-top: 1.25rem;
-      font-size: 0.95rem;
-      line-height: 1.5;
-    }
-
-    /* Quiz Panel */
-    .quiz-card {
-      margin-top: 1.5rem;
-      padding-top: 1.5rem;
-      border-top: 2px solid var(--border);
-    }
-
-    .quiz-options {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.75rem;
+      background: var(--primary);
+      color: white;
+      transition: all 0.2s;
       margin-top: 1rem;
     }
 
-    .opt-btn {
-      padding: 0.8rem;
-      border: 2px solid var(--border);
-      border-radius: var(--radius-md);
-      background: white;
+    .btn:hover { background: var(--primary-hover); transform: translateY(-1px); }
+
+    .explanation {
+      margin-top: 1rem;
       font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .opt-btn:hover {
-      border-color: var(--primary);
-      background: #f5f3ff;
-    }
-
-    /* Tutor Section */
-    .tutor-header {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .tutor-avatar {
-      width: 40px;
-      height: 40px;
-      background: #fef3c7;
-      border: 2px solid var(--accent);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-    }
-
-    .tutor-msg {
-      font-size: 0.9rem;
-      color: #334155;
-      line-height: 1.5;
-      background: #fffbeb;
-      padding: 0.85rem;
-      border-radius: var(--radius-md);
-      border: 1px solid #fef3c7;
+      color: #0c4a6e;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="header-content">
-      <a href="#" class="logo">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-        Mathiq
-      </a>
-      <div class="stats-bar">
-        <div class="stat-badge">🔥 <span id="streak">3</span> Day Streak</div>
-        <div class="stat-badge">⭐ <span id="stars">12</span> Stars</div>
-        <div class="stat-badge">⚡ <span id="xp">250</span> XP</div>
-      </div>
-    </div>
-  </header>
+  <div class="app-container">
+    <header>
+      <h1>🍞 The Decimal Bakery</h1>
+      <p>Master Place Value Shifts in 3 Quick Steps</p>
+    </header>
 
-  <div class="container">
-    <!-- Module Switcher -->
-    <div class="module-nav">
-      <div class="nav-card active" onclick="switchModule('bakery')">
-        <div class="nav-icon">🍞</div>
-        <div>
-          <h4>Decimal Bakery</h4>
-          <p style="font-size:0.8rem; color:var(--text-muted);">Shift & Scale Place Values</p>
-        </div>
+    <!-- Visual Proof Header -->
+    <div class="proof-box">
+      <div>
+        <div class="frac-unit"><span class="num">1</span><span class="den">10</span></div>
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">1 part of 10</p>
       </div>
-      <div class="nav-card" onclick="switchModule('fractions')">
-        <div class="nav-icon">🍕</div>
-        <div>
-          <h4>Fraction Slicer</h4>
-          <p style="font-size:0.8rem; color:var(--text-muted);">Equivalence & Parts</p>
-        </div>
-      </div>
-      <div class="nav-card" onclick="switchModule('graph')">
-        <div class="nav-icon">📐</div>
-        <div>
-          <h4>Coordinate Grid</h4>
-          <p style="font-size:0.8rem; color:var(--text-muted);">Polygons & Geometry</p>
-        </div>
+      <div class="eq-sign">=</div>
+      <div>
+        <div style="font-size:1.6rem; font-weight:800; color:var(--primary);">0.1</div>
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">Tenths Column</p>
       </div>
     </div>
 
-    <!-- Workspace -->
-    <div class="workspace">
-      <!-- Main Activity Stage -->
-      <div class="main-stage">
-        
-        <!-- MODULE 1: DECIMAL BAKERY -->
-        <div id="mod-bakery">
-          <h2>The Decimal Bakery: Place Value Shifter</h2>
-          <p style="color:var(--text-muted); margin-bottom: 1rem;">See how multiplying and dividing by 0.1 and 0.01 shifts digits across the decimal tree.</p>
+    <!-- Stepper Navigation -->
+    <div class="stepper">
+      <div class="step-dot active" id="step1-dot">1. Calculate 1/10</div>
+      <div class="step-dot" id="step2-dot">2. Connect to 0.1</div>
+      <div class="step-dot" id="step3-dot">3. Practice Shift</div>
+    </div>
 
-          <!-- SVG Bakery Scene -->
-          <div class="bakery-oven-container">
-            <svg class="oven-svg" viewBox="0 0 400 120">
-              <!-- Animated Steam Particles -->
-              <circle cx="180" cy="30" r="3" fill="#ffffff" opacity="0.6">
-                <animate attributeName="cy" values="30;10" dur="2s" repeatCount="indefinite"/>
-                <animate attributeName="opacity" values="0.6;0" dur="2s" repeatCount="indefinite"/>
-              </circle>
-              <circle cx="220" cy="25" r="4" fill="#ffffff" opacity="0.6">
-                <animate attributeName="cy" values="25;5" dur="2.5s" repeatCount="indefinite"/>
-                <animate attributeName="opacity" values="0.6;0" dur="2.5s" repeatCount="indefinite"/>
-              </circle>
-              <!-- Oven Arch -->
-              <path d="M 120 110 A 80 80 0 0 1 280 110 Z" fill="#2d221e" stroke="#fb923c" stroke-width="4"/>
-              <!-- Glowing Embers -->
-              <path d="M 150 110 A 50 50 0 0 1 250 110 Z" fill="#f97316" opacity="0.8"/>
-              <!-- Artisan Bread Loaf -->
-              <ellipse id="bread-graphic" cx="200" cy="95" rx="45" ry="18" fill="#d97706" stroke="#78350f" stroke-width="3"/>
-            </svg>
-            <div style="font-size:0.9rem; margin-top:0.5rem;" id="bread-weight-tag">Batch Weight: 400g</div>
-          </div>
+    <!-- Place Value Board -->
+    <div class="board-wrapper">
+      <div class="place-board">
+        <div class="header-col">Hundreds <span>(100)</span></div>
+        <div class="header-col">Tens <span>(10)</span></div>
+        <div class="header-col">Ones <span>(1)</span></div>
+        <div></div>
+        <div class="header-col">Tenths <span>(0.1)</span></div>
+        <div class="header-col">Hundredths <span>(0.01)</span></div>
 
-          <!-- Place Value Table -->
-          <div class="place-table">
-            <div class="col-header">Hundreds<br>(100)</div>
-            <div class="col-header">Tens<br>(10)</div>
-            <div class="col-header">Ones<br>(1)</div>
-            <div></div>
-            <div class="col-header">Tenths<br>(0.1)</div>
-            <div class="col-header">Hundredths<br>(0.01)</div>
-
-            <div class="slot" id="s-100"></div>
-            <div class="slot" id="s-10"></div>
-            <div class="slot" id="s-1"></div>
-            <div class="decimal-mark">.</div>
-            <div class="slot" id="s-0_1"></div>
-            <div class="slot" id="s-0_01"></div>
-          </div>
-
-          <!-- Operations -->
-          <div class="controls-grid">
-            <button class="btn btn-primary" onclick="shiftValue('mult_0_1')">× 0.1 (Shrink 10×)</button>
-            <button class="btn btn-primary" onclick="shiftValue('mult_0_01')">× 0.01 (Shrink 100×)</button>
-            <button class="btn btn-primary" onclick="shiftValue('div_0_1')">÷ 0.1 (Expand 10×)</button>
-            <button class="btn btn-primary" onclick="shiftValue('div_0_01')">÷ 0.01 (Expand 100×)</button>
-          </div>
-
-          <div style="text-align: center; margin-top: 1rem;">
-            <button class="btn btn-outline" onclick="resetBakery()">Reset to 400g</button>
-          </div>
-
-          <div class="explanation-banner" id="bakery-exp">
-            <strong>Self-Discovery Guide:</strong> Click any operation above to observe how taking $\frac{1}{10}$ or $\frac{1}{100}$ of a batch shifts the digits relative to the fixed decimal point.
-          </div>
-
-          <!-- Self-Guided Quiz -->
-          <div class="quiz-card">
-            <h4>🎯 Independent Mini-Quest</h4>
-            <p id="quest-desc" style="font-size:0.95rem; margin-top:0.5rem;">Maya has <strong>400g</strong> of dough. She needs to make 10 equal cookies ($0.1$ size). Which operation should she perform?</p>
-            <div class="quiz-options">
-              <button class="opt-btn" onclick="checkQuest(0)">× 0.1</button>
-              <button class="opt-btn" onclick="checkQuest(1)">÷ 0.1</button>
-              <button class="opt-btn" onclick="checkQuest(2)">× 0.01</button>
-              <button class="opt-btn" onclick="checkQuest(3)">÷ 0.01</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- MODULE 2: FRACTIONS (Placeholder for tab switching) -->
-        <div id="mod-fractions" style="display:none;">
-          <h2>Fraction Slicer & Equivalence</h2>
-          <p style="color:var(--text-muted); margin-bottom:1.5rem;">Interactive pie slicer visualizer.</p>
-          <div style="text-align:center; padding:3rem; background:#f8fafc; border-radius:12px;">
-            <svg width="120" height="120" viewBox="0 0 100 100">
-              <circle cx="50" cy="50" r="45" fill="#e0e7ff" stroke="#4f46e5" stroke-width="4"/>
-              <path d="M 50 50 L 50 5 A 45 45 0 0 1 95 50 Z" fill="#4f46e5"/>
-            </svg>
-            <h3 style="margin-top:1rem;">Module Loaded</h3>
-            <p style="color:var(--text-muted);">Slice fractions and visualize equivalent proportions dynamically.</p>
-          </div>
-        </div>
-
-        <!-- MODULE 3: GRAPH (Placeholder) -->
-        <div id="mod-graph" style="display:none;">
-          <h2>Coordinate Plane Explorer</h2>
-          <p style="color:var(--text-muted); margin-bottom:1.5rem;">Drag points to construct geometric polygons.</p>
-          <div style="text-align:center; padding:3rem; background:#f8fafc; border-radius:12px;">
-            <svg width="120" height="120" viewBox="0 0 100 100">
-              <line x1="10" y1="90" x2="90" y2="90" stroke="#64748b" stroke-width="3"/>
-              <line x1="10" y1="90" x2="10" y2="10" stroke="#64748b" stroke-width="3"/>
-              <polygon points="20,80 80,80 50,20" fill="#0ea5e9" opacity="0.6" stroke="#0284c7" stroke-width="2"/>
-            </svg>
-            <h3 style="margin-top:1rem;">Module Loaded</h3>
-            <p style="color:var(--text-muted);">Explore spatial reasoning and area calculations.</p>
-          </div>
-        </div>
-
+        <div class="slot" id="s-100"></div>
+        <div class="slot" id="s-10"></div>
+        <div class="slot" id="s-1"></div>
+        <div class="decimal-point">.</div>
+        <div class="slot" id="s-0_1"></div>
+        <div class="slot" id="s-0_01"></div>
       </div>
+    </div>
 
-      <!-- Sidebar -->
-      <div class="sidebar">
-        <!-- Tutor Feedback -->
-        <div class="side-card">
-          <div class="tutor-header">
-            <div class="tutor-avatar">🧙‍♂️</div>
-            <div>
-              <h4 style="font-size:0.95rem;">Your Math Tutor Says</h4>
-              <span style="font-size:0.75rem; color:var(--text-muted);">AI Diagnostic Feedback</span>
-            </div>
-          </div>
-          <div class="tutor-msg" id="tutor-text">
-            "Welcome to Mathiq! Start by clicking the bakery buttons to see how digits shift across place value columns when scaling by 0.1 and 0.01."
-          </div>
-        </div>
+    <!-- Dynamic Task Container -->
+    <div class="task-card">
+      <div class="task-title" id="task-title">Step 1: Take 1/10 of 400g</div>
+      <p id="task-desc">Maya has <strong>400g</strong> of dough. Calculate <span class="frac-unit" style="font-size:1rem;"><span class="num">1</span><span class="den">10</span></span> of 400g (Divide by 10):</p>
 
-        <!-- Skill Mastery Progress -->
-        <div class="side-card">
-          <h4 style="font-size:0.95rem; margin-bottom:0.75rem;">Skill Mastery</h4>
-          <div style="margin-bottom:0.75rem;">
-            <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:0.25rem;">
-              <span>Place Value Scaling</span>
-              <strong>85%</strong>
-            </div>
-            <div style="height:6px; background:#e2e8f0; border-radius:3px; overflow:hidden;">
-              <div style="width:85%; height:100%; background:var(--success);"></div>
-            </div>
-          </div>
-          <div>
-            <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:0.25rem;">
-              <span>Fraction Reasoning</span>
-              <strong>60%</strong>
-            </div>
-            <div style="height:6px; background:#e2e8f0; border-radius:3px; overflow:hidden;">
-              <div style="width:60%; height:100%; background:var(--accent);"></div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <button class="btn" id="action-btn" onclick="nextStep()">Calculate 400 × 1/10</button>
+      <div class="explanation" id="exp-text"></div>
     </div>
   </div>
 
   <script>
-    // State
-    let currentVal = 400;
-    let xp = 250;
-    let stars = 12;
+    let step = 1;
+    let value = 400;
 
     const slots = {
       100: document.getElementById('s-100'),
@@ -533,24 +261,13 @@
       let intStr = parts[0] || '0';
       let decStr = parts[1] || '';
 
-      // Integer placement
       let rev = intStr.split('').reverse().join('');
       if (rev[0]) createCard(slots['1'], rev[0]);
       if (rev[1]) createCard(slots['10'], rev[1]);
       if (rev[2]) createCard(slots['100'], rev[2]);
 
-      // Decimal placement
       if (decStr[0]) createCard(slots['0_1'], decStr[0]);
       if (decStr[1]) createCard(slots['0_01'], decStr[1]);
-
-      // Update SVG loaf graphic scale
-      const bread = document.getElementById('bread-graphic');
-      const tag = document.getElementById('bread-weight-tag');
-      tag.innerText = `Batch Weight: ${rounded}g`;
-
-      let scale = Math.max(0.2, Math.min(1.5, rounded / 400));
-      bread.setAttribute('transform', `scale(${scale})`);
-      bread.style.transformOrigin = '200px 95px';
     }
 
     function createCard(slot, char) {
@@ -561,66 +278,61 @@
       slot.appendChild(card);
     }
 
-    function shiftValue(type) {
-      let prev = currentVal;
-      let exp = document.getElementById('bakery-exp');
+    function nextStep() {
+      const title = document.getElementById('task-title');
+      const desc = document.getElementById('task-desc');
+      const btn = document.getElementById('action-btn');
+      const exp = document.getElementById('exp-text');
 
-      if (type === 'mult_0_1') {
-        currentVal = Math.round((currentVal * 0.1) * 100) / 100;
-        exp.innerHTML = `<strong>Shrink Step (× 0.1):</strong> Taking $\\frac{1}{10}$ of ${prev}g equals dividing by 10. Every digit scoots <strong>1 column to the RIGHT $\\rightarrow$</strong>. Result: <strong>${currentVal}g</strong>.`;
-      } else if (type === 'mult_0_01') {
-        currentVal = Math.round((currentVal * 0.01) * 100) / 100;
-        exp.innerHTML = `<strong>Double Shrink (× 0.01):</strong> Taking $\\frac{1}{100}$ of ${prev}g equals dividing by 100. Every digit scoots <strong>2 columns to the RIGHT $\\rightarrow\\rightarrow$</strong>. Result: <strong>${currentVal}g</strong>.`;
-      } else if (type === 'div_0_1') {
-        currentVal = Math.round((currentVal / 0.1) * 100) / 100;
-        exp.innerHTML = `<strong>Expand Step (÷ 0.1):</strong> Counting how many 0.1 slices fit inside ${prev}g multiplies it by 10. Digits jump <strong>1 column to the LEFT $\\leftarrow$</strong>. Result: <strong>${currentVal}g</strong>.`;
-      } else if (type === 'div_0_01') {
-        currentVal = Math.round((currentVal / 0.01) * 100) / 100;
-        exp.innerHTML = `<strong>Mega Expand (÷ 0.01):</strong> Counting how many 0.01 crumbs fit in ${prev}g multiplies it by 100. Digits jump <strong>2 columns to the LEFT $\\leftarrow\\leftarrow$</strong>. Result: <strong>${currentVal}g</strong>.`;
-      }
+      if (step === 1) {
+        value = 40;
+        renderDigits(value);
+        
+        title.innerText = "Step 2: Connect 1/10 to 0.1";
+        desc.innerHTML = "Taking <span class='frac-unit' style='font-size:1rem;'><span class='num'>1</span><span class='den'>10</span></span> shrank 400 to <strong>40</strong> (Digits shifted 1 place RIGHT ➔).";
+        btn.innerText = "Try 400 × 0.1 Instead";
+        exp.innerHTML = "Notice how 400 × 0.1 produces the EXACT same shift!";
+        
+        document.getElementById('step1-dot').classList.remove('active');
+        document.getElementById('step2-dot').classList.add('active');
+        step = 2;
+      } else if (step === 2) {
+        value = 400;
+        renderDigits(value);
 
-      renderDigits(currentVal);
-    }
+        title.innerText = "Step 3: Interactive Shift";
+        desc.innerHTML = "Now click below to execute <strong>400 × 0.1</strong>:";
+        btn.innerText = "Multiply by 0.1 (Shift Right)";
+        exp.innerHTML = "Watch the digits move 1 place right across the decimal tree!";
 
-    function resetBakery() {
-      currentVal = 400;
-      renderDigits(currentVal);
-      document.getElementById('bakery-exp').innerHTML = `<strong>Reset to 400g.</strong> Choose an operation to explore shifting!`;
-    }
+        document.getElementById('step2-dot').classList.remove('active');
+        document.getElementById('step3-dot').classList.add('active');
+        step = 3;
+      } else if (step === 3) {
+        value = 40;
+        renderDigits(value);
 
-    function checkQuest(idx) {
-      const tutor = document.getElementById('tutor-text');
-      if (idx === 0) {
-        tutor.innerHTML = "<strong>Spot on! 🎉</strong> Multiplying by 0.1 takes $\\frac{1}{10}$ of the weight, shrinking 400g down to 40g perfectly.";
-        xp += 50;
-        stars += 1;
-        document.getElementById('xp').innerText = xp;
-        document.getElementById('stars').innerText = stars;
+        title.innerText = "🎉 Conceptual Clarity Unlocked!";
+        desc.innerHTML = "Multiplying by <strong>0.1</strong> is identical to taking <span class='frac-unit' style='font-size:1rem;'><span class='num'>1</span><span class='den'>10</span></span> (Dividing by 10). It shifts every digit <strong>1 position to the RIGHT</strong>.";
+        btn.innerText = "Reset & Try Again";
+        exp.innerHTML = "Great job mastering place value shifts!";
+        step = 4;
       } else {
-        tutor.innerHTML = "<strong>Not quite! 💡</strong> Remember: dividing by 0.1 makes a value 10 times bigger! To make small cookies from a big dough batch, multiply by 0.1 (take $\\frac{1}{10}$).";
+        value = 400;
+        renderDigits(value);
+        step = 1;
+
+        title.innerText = "Step 1: Take 1/10 of 400g";
+        desc.innerHTML = "Maya has <strong>400g</strong> of dough. Calculate <span class='frac-unit' style='font-size:1rem;'><span class='num'>1</span><span class='den'>10</span></span> of 400g (Divide by 10):";
+        btn.innerText = "Calculate 400 × 1/10";
+        exp.innerHTML = "";
+
+        document.querySelectorAll('.step-dot').forEach(d => d.classList.remove('active'));
+        document.getElementById('step1-dot').classList.add('active');
       }
     }
 
-    function switchModule(mod) {
-      document.querySelectorAll('.nav-card').forEach(c => c.classList.remove('active'));
-      document.getElementById('mod-bakery').style.display = 'none';
-      document.getElementById('mod-fractions').style.display = 'none';
-      document.getElementById('mod-graph').style.display = 'none';
-
-      if(mod === 'bakery') {
-        document.getElementById('mod-bakery').style.display = 'block';
-        event.currentTarget.classList.add('active');
-      } else if(mod === 'fractions') {
-        document.getElementById('mod-fractions').style.display = 'block';
-        event.currentTarget.classList.add('active');
-      } else if(mod === 'graph') {
-        document.getElementById('mod-graph').style.display = 'block';
-        event.currentTarget.classList.add('active');
-      }
-    }
-
-    // Init
-    renderDigits(currentVal);
+    renderDigits(value);
   </script>
 </body>
 </html>
