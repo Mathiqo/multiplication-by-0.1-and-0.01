@@ -2,411 +2,249 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mathiq — Active Decimal Place Value</title>
+  <title>Interactive Place Value Explorer</title>
   <style>
-    :root {
-      --bg: #fdfbf7;
-      --card-bg: #ffffff;
-      --primary: #d97706;
-      --primary-hover: #b45309;
-      --secondary: #0284c7;
-      --success: #16a34a;
-      --danger: #dc2626;
-      --text: #1c1917;
-      --text-muted: #78716c;
-      --border: #e7e5e4;
-      --slot-bg: #f5f5f4;
-      --radius: 16px;
-      --shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
-    body { background-color: var(--bg); color: var(--text); min-height: 100vh; padding: 2rem 1rem; }
-
-    .app-container {
-      max-width: 800px;
-      margin: 0 auto;
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      padding: 2rem;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border);
-    }
-
-    header { text-align: center; margin-bottom: 1.5rem; }
-    header h1 { font-size: 2rem; color: var(--primary); margin-bottom: 0.25rem; }
-    header p { color: var(--text-muted); font-size: 1.05rem; }
-
-    /* Visual Proof Header */
-    .proof-box {
-      background: #fef3c7;
-      border: 2px solid #fde68a;
-      border-radius: 12px;
-      padding: 1rem;
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f7f6;
       display: flex;
-      justify-content: space-around;
-      align-items: center;
-      margin-bottom: 1.5rem;
+      justify-content: center;
+      padding: 20px;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      max-width: 750px;
+      width: 100%;
       text-align: center;
     }
-
-    .frac-unit {
-      display: inline-flex;
+    .prompt-box {
+      background-color: #fff9db;
+      border: 2px solid #ffe066;
+      padding: 15px;
+      border-radius: 8px;
+      font-weight: 600;
+      color: #5c3c00;
+      margin-bottom: 20px;
+    }
+    .place-table {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 25px;
+    }
+    .column {
+      display: flex;
       flex-direction: column;
       align-items: center;
-      vertical-align: middle;
-      font-weight: 800;
-      font-size: 1.3rem;
-      color: var(--primary);
-      line-height: 1;
+      width: 110px;
     }
-
-    .frac-unit .num { border-bottom: 2px solid var(--primary); padding: 0 4px; }
-    .frac-unit .den { padding: 0 4px; }
-
-    .eq-sign { font-size: 1.8rem; font-weight: 900; color: var(--primary); }
-
-    /* Progress Stepper */
-    .stepper {
-      display: flex;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-bottom: 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    .step-dot {
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-      background: var(--slot-bg);
+    .header {
       font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      transition: all 0.2s;
-    }
-
-    .step-dot.active { background: var(--primary); color: white; }
-
-    /* Place Value Table */
-    .board-wrapper { margin: 1.5rem 0; overflow-x: auto; }
-
-    .place-board {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr) 30px repeat(2, 1fr);
-      gap: 0.5rem;
-      align-items: center;
-      min-width: 600px;
-    }
-
-    .header-col {
-      text-align: center;
-      font-size: 0.85rem;
-      font-weight: 800;
-      color: var(--text-muted);
+      font-weight: bold;
+      color: #555;
+      margin-bottom: 8px;
       text-transform: uppercase;
     }
-
-    .header-col span { font-size: 0.75rem; font-weight: 400; display: block; }
-
+    .header span {
+      display: block;
+      font-size: 0.75rem;
+      color: #888;
+      font-weight: normal;
+    }
     .slot {
-      height: 75px;
-      background: var(--slot-bg);
-      border: 2px dashed #d6d3d1;
+      width: 90px;
+      height: 90px;
+      border: 2px dashed #ccc;
       border-radius: 10px;
       display: flex;
-      align-items: center;
       justify-content: center;
-    }
-
-    .digit-card {
-      width: 50px;
-      height: 60px;
-      background: var(--secondary);
-      color: white;
-      font-size: 2rem;
-      font-weight: 800;
-      border-radius: 8px;
-      display: flex;
       align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      background-color: #fafafa;
     }
-
-    @keyframes popIn {
-      0% { transform: scale(0.6); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
     .decimal-point {
       font-size: 3rem;
-      font-weight: 900;
-      color: var(--primary);
-      text-align: center;
+      font-weight: bold;
+      color: #e67e22;
+      margin: 0 4px;
+      align-self: flex-end;
+      padding-bottom: 10px;
     }
-
-    /* Interactive Task Panel */
-    .task-card {
-      background: #f0f9ff;
-      border: 2px solid #bae6fd;
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      text-align: center;
-      margin-top: 1rem;
-    }
-
-    .task-title { font-size: 1.2rem; font-weight: 800; color: #0369a1; margin-bottom: 0.5rem; }
-
-    /* Interactive Input Styling */
-    .math-input {
-      width: 100px;
-      padding: 0.5rem;
-      font-size: 1.2rem;
-      font-weight: 800;
-      text-align: center;
-      border: 2px solid var(--secondary);
-      border-radius: 8px;
-      outline: none;
-      margin: 0.5rem;
-    }
-
-    .btn {
-      padding: 0.8rem 1.5rem;
-      font-size: 1rem;
-      font-weight: 700;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      background: var(--primary);
+    .digit-tile {
+      width: 75px;
+      height: 75px;
+      background-color: #0088cc;
       color: white;
-      transition: all 0.2s;
-      margin-top: 1rem;
+      font-size: 2.2rem;
+      font-weight: bold;
+      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.2s, background-color 0.2s;
     }
+    .digit-tile:hover {
+      transform: scale(1.05);
+      background-color: #0077bb;
+    }
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    .btn {
+      padding: 10px 20px;
+      font-size: 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      color: white;
+      transition: background 0.2s;
+    }
+    .btn-divide { background-color: #e67e22; }
+    .btn-divide:hover { background-color: #d35400; }
+    .btn-multiply { background-color: #27ae60; }
+    .btn-multiply:hover { background-color: #219150; }
+    .btn-reset { background-color: #95a5a6; }
+    .btn-reset:hover { background-color: #7f8c8d; }
 
-    .btn:hover { background: var(--primary-hover); transform: translateY(-1px); }
-
-    .btn-next { background: var(--success); }
-    .btn-next:hover { background: #15803d; }
-
-    .feedback-msg {
-      margin-top: 1rem;
-      font-weight: 700;
-      font-size: 1.05rem;
+    .value-display {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #333;
+      padding: 12px;
+      background: #eef7fc;
+      border-radius: 8px;
+      border: 1px solid #bce1f7;
     }
   </style>
 </head>
 <body>
 
-  <div class="app-container">
-    <header>
-      <h1>🍞 Mathiq: The Decimal Bakery</h1>
-      <p>Think, Calculate & Shift Digits Yourself!</p>
-    </header>
+<div class="container">
+  <h2>Think, Calculate & Shift Digits Yourself!</h2>
+  
+  <div class="prompt-box" id="instruction">
+    Where does the digit move when you divide by 10? Click "÷ 10" to test your idea!
+  </div>
 
-    <!-- Visual Proof Header -->
-    <div class="proof-box">
-      <div>
-        <div class="frac-unit"><span class="num">1</span><span class="den">10</span></div>
-        <p style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;">1 part out of 10</p>
-      </div>
-      <div class="eq-sign">=</div>
-      <div>
-        <div style="font-size:1.5rem; font-weight:800; color:var(--primary);">0.1</div>
-        <p style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;">Tenths Position</p>
+  <div class="place-table">
+    <div class="column">
+      <div class="header">Hundreds<span>(100)</span></div>
+      <div class="slot" data-index="0">
+        <div class="digit-tile" id="tile-4">4</div>
       </div>
     </div>
 
-    <!-- Stepper Navigation -->
-    <div class="stepper">
-      <div class="step-dot active" id="dot-1">1. Calculate 1/10</div>
-      <div class="step-dot" id="dot-2">2. Discover 0.1</div>
-      <div class="step-dot" id="dot-3">3. Solve 0.1</div>
-      <div class="step-dot" id="dot-4">4. Quest Challenge</div>
-    </div>
-
-    <!-- Place Value Board -->
-    <div class="board-wrapper">
-      <div class="place-board">
-        <div class="header-col">Hundreds <span>(100)</span></div>
-        <div class="header-col">Tens <span>(10)</span></div>
-        <div class="header-col">Ones <span>(1)</span></div>
-        <div></div>
-        <div class="header-col">Tenths <span>(0.1)</span></div>
-        <div class="header-col">Hundredths <span>(0.01)</span></div>
-
-        <div class="slot" id="s-100"></div>
-        <div class="slot" id="s-10"></div>
-        <div class="slot" id="s-1"></div>
-        <div class="decimal-point">.</div>
-        <div class="slot" id="s-0_1"></div>
-        <div class="slot" id="s-0_01"></div>
+    <div class="column">
+      <div class="header">Tens<span>(10)</span></div>
+      <div class="slot" data-index="1">
+        <div class="digit-tile" id="tile-0a">0</div>
       </div>
     </div>
 
-    <!-- Active Task Container -->
-    <div class="task-card" id="task-card">
-      <div class="task-title" id="task-title">Step 1: Solve 400 × 1/10</div>
-      <p id="task-desc">Maya has <strong>400g</strong> of dough on the board. Type the answer to take <span class="frac-unit" style="font-size:0.9rem;"><span class="num">1</span><span class="den">10</span></span> of 400g:</p>
-
-      <div id="interaction-area">
-        <div>
-          <span>400 × <span class="frac-unit" style="font-size:0.8rem;"><span class="num">1</span><span class="den">10</span></span> = </span>
-          <input type="number" id="user-input-1" class="math-input" placeholder="?" />
-        </div>
-        <button class="btn" onclick="checkStep1()">Check Answer</button>
+    <div class="column">
+      <div class="header">Ones<span>(1)</span></div>
+      <div class="slot" data-index="2">
+        <div class="digit-tile" id="tile-0b">0</div>
       </div>
+    </div>
 
-      <div class="feedback-msg" id="feedback"></div>
+    <div class="decimal-point">.</div>
 
-      <button class="btn btn-next" id="next-btn" style="display:none;" onclick="loadNextStage()">
-        Continue ➔
-      </button>
+    <div class="column">
+      <div class="header">Tenths<span>(0.1)</span></div>
+      <div class="slot" data-index="3"></div>
+    </div>
+
+    <div class="column">
+      <div class="header">Hundredths<span>(0.01)</span></div>
+      <div class="slot" data-index="4"></div>
     </div>
   </div>
 
-  <script>
-    let stage = 1;
-    let currentValue = 400;
+  <div class="controls">
+    <button class="btn btn-divide" onclick="shiftRight()">÷ 10 (Shift Right)</button>
+    <button class="btn btn-multiply" onclick="shiftLeft()">× 10 (Shift Left)</button>
+    <button class="btn btn-reset" onclick="resetBoard()">Reset (400)</button>
+  </div>
 
-    const slots = {
-      100: document.getElementById('s-100'),
-      10: document.getElementById('s-10'),
-      1: document.getElementById('s-1'),
-      '0_1': document.getElementById('s-0_1'),
-      '0_01': document.getElementById('s-0_01')
-    };
+  <div class="value-display" id="current-value">
+    Current Value: 400
+  </div>
+</div>
 
-    function renderDigits(val) {
-      Object.values(slots).forEach(s => s.innerHTML = '');
-      
-      let rounded = Math.round(val * 100) / 100;
-      let parts = rounded.toString().split('.');
-      let intStr = parts[0] || '0';
-      let decStr = parts[1] || '';
+<script>
+  // Initial positions: [Hundreds, Tens, Ones, Tenths, Hundredths]
+  let state = ['4', '0', '0', '', ''];
+  const values = [100, 10, 1, 0.1, 0.01];
 
-      let rev = intStr.split('').reverse().join('');
-      if (rev[0]) createCard(slots['1'], rev[0]);
-      if (rev[1]) createCard(slots['10'], rev[1]);
-      if (rev[2]) createCard(slots['100'], rev[2]);
+  function render() {
+    const slots = document.querySelectorAll('.slot');
+    slots.forEach((slot, index) => {
+      slot.innerHTML = '';
+      if (state[index] !== '') {
+        const tile = document.createElement('div');
+        tile.className = 'digit-tile';
+        tile.textContent = state[index];
+        slot.appendChild(tile);
+      }
+    });
 
-      if (decStr[0]) createCard(slots['0_1'], decStr[0]);
-      if (decStr[1]) createCard(slots['0_01'], decStr[1]);
-    }
+    calculateValue();
+  }
 
-    function createCard(slot, char) {
-      if(!slot) return;
-      const card = document.createElement('div');
-      card.className = 'digit-card';
-      card.innerText = char;
-      slot.appendChild(card);
-    }
-
-    function checkStep1() {
-      const val = document.getElementById('user-input-1').value;
-      const feedback = document.getElementById('feedback');
-      const nextBtn = document.getElementById('next-btn');
-
-      if (parseFloat(val) === 40) {
-        currentValue = 40;
-        renderDigits(currentValue);
-        feedback.innerText = "🎯 Correct! 400 ÷ 10 = 40. Look at the chart: every digit shifted 1 place to the RIGHT!";
-        feedback.style.color = "var(--success)";
-        nextBtn.style.display = "inline-block";
-      } else {
-        feedback.innerText = "💡 Think: What is 400 divided by 10?";
-        feedback.style.color = "var(--danger)";
+  function calculateValue() {
+    let total = 0;
+    for (let i = 0; i < state.length; i++) {
+      if (state[i] !== '') {
+        total += parseInt(state[i]) * values[i];
       }
     }
+    // Handle floating point precision issues
+    const displayVal = Math.round(total * 100) / 100;
+    document.getElementById('current-value').textContent = `Current Value: ${displayVal}`;
+  }
 
-    function checkStep3() {
-      const val = document.getElementById('user-input-3').value;
-      const feedback = document.getElementById('feedback');
-      const nextBtn = document.getElementById('next-btn');
-
-      if (parseFloat(val) === 40) {
-        currentValue = 40;
-        renderDigits(currentValue);
-        feedback.innerText = "🎉 Spot on! 400 × 0.1 is 40! Multiplying by 0.1 is the exact same as taking 1/10.";
-        feedback.style.color = "var(--success)";
-        nextBtn.style.display = "inline-block";
-      } else {
-        feedback.innerText = "💡 Remember: Multiplying by 0.1 is identical to dividing by 10!";
-        feedback.style.color = "var(--danger)";
-      }
+  function shiftRight() {
+    if (state[4] !== '') {
+      document.getElementById('instruction').textContent = "You've reached the rightmost limit!";
+      return;
     }
+    state.pop();
+    state.unshift('');
+    document.getElementById('instruction').textContent = "Notice how every digit moves ONE place to the RIGHT, making the value 10 times smaller!";
+    render();
+  }
 
-    function loadNextStage() {
-      const title = document.getElementById('task-title');
-      const desc = document.getElementById('task-desc');
-      const area = document.getElementById('interaction-area');
-      const feedback = document.getElementById('feedback');
-      const nextBtn = document.getElementById('next-btn');
-
-      feedback.innerText = "";
-      nextBtn.style.display = "none";
-      stage++;
-
-      document.querySelectorAll('.step-dot').forEach(d => d.classList.remove('active'));
-      document.getElementById(`dot-${Math.min(stage, 4)}`).classList.add('active');
-
-      if (stage === 2) {
-        title.innerText = "Step 2: Connecting 1/10 to 0.1";
-        desc.innerHTML = "Since <span class='frac-unit' style='font-size:0.9rem;'><span class='num'>1</span><span class='den'>10</span></span> = <strong>0.1</strong>, taking 1/10 is the exact same as multiplying by 0.1!";
-        area.innerHTML = `
-          <div style="font-weight:700; color:var(--primary); font-size:1.1rem; margin:1rem 0;">
-            400 × <span class="frac-unit" style="font-size:0.8rem;"><span class="num">1</span><span class="den">10</span></span> = 40<br>
-            400 × 0.1 = ?
-          </div>
-        `;
-        nextBtn.style.display = "inline-block";
-      } else if (stage === 3) {
-        currentValue = 400;
-        renderDigits(currentValue);
-        title.innerText = "Step 3: Now Calculate 400 × 0.1";
-        desc.innerHTML = "Apply what you just learned! Type your calculated answer below:";
-        area.innerHTML = `
-          <div>
-            <span>400 × 0.1 = </span>
-            <input type="number" id="user-input-3" class="math-input" placeholder="?" />
-          </div>
-          <button class="btn" onclick="checkStep3()">Check Answer</button>
-        `;
-      } else if (stage === 4) {
-        title.innerText = "Step 4: Quest Challenge";
-        desc.innerHTML = "🍫 A cookie dough bar is divided into 10 equal pieces. You take 1 piece. What decimal part did you take?";
-        area.innerHTML = `
-          <div style="margin-top:1rem;">
-            <input type="number" step="0.01" id="quiz-input" class="math-input" placeholder="0.?" />
-            <br>
-            <button class="btn" onclick="checkQuiz()">Submit Answer</button>
-          </div>
-        `;
-      } else {
-        stage = 0;
-        currentValue = 400;
-        renderDigits(currentValue);
-        loadNextStage();
-      }
+  function shiftLeft() {
+    if (state[0] !== '') {
+      document.getElementById('instruction').textContent = "You've reached the leftmost limit!";
+      return;
     }
+    state.shift();
+    state.push('');
+    document.getElementById('instruction').textContent = "Notice how every digit moves ONE place to the LEFT, making the value 10 times larger!";
+    render();
+  }
 
-    function checkQuiz() {
-      const val = document.getElementById('quiz-input').value;
-      const feedback = document.getElementById('feedback');
-      const nextBtn = document.getElementById('next-btn');
+  function resetBoard() {
+    state = ['4', '0', '0', '', ''];
+    document.getElementById('instruction').textContent = "Board reset to 400. Try shifting digits left or right!";
+    render();
+  }
 
-      if (parseFloat(val) === 0.1) {
-        feedback.innerText = "🌟 Outstanding! 1 piece out of 10 = 1/10 = 0.1";
-        feedback.style.color = "var(--success)";
-        nextBtn.innerText = "Restart Activity ↺";
-        nextBtn.style.display = "inline-block";
-      } else {
-        feedback.innerText = "❌ Think: 1 divided by 10 = 0.1";
-        feedback.style.color = "var(--danger)";
-      }
-    }
+  // Initial render
+  render();
+</script>
 
-    renderDigits(currentValue);
-  </script>
 </body>
 </html>
